@@ -175,8 +175,9 @@
   .why{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   @media (max-width:860px){.why-grid{grid-template-columns:1fr;}}
-  .promo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-  @media (max-width:760px){.promo-grid{grid-template-columns:1fr;}}
+  .promo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:900px){.promo-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.promo-grid{grid-template-columns:1fr;}}
   .why-card{
     background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:24px;
   }
@@ -620,6 +621,11 @@
         <h3>🛠️ Not limited to gold</h3>
         <p>The included bot was built to trade the GLD ETF, but the code is yours — modify it to trade any other commodity or stock, or use it as a starting template to build an entirely new bot from scratch.</p>
       </div>
+      <div class="why-card">
+        <div class="fail" style="color:var(--teal);">◆ GOOD TO KNOW</div>
+        <h3>⚡ Can trade crypto, 24/7</h3>
+        <p>Point BotWatch at a crypto pair like BTC/USD instead of GLD, and it can run continuously — crypto markets don't close, so there's no market-hours gate holding it back. Same Alpaca account, same dashboard, same monitoring.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -658,7 +664,7 @@
       <div class="isnt-col yes">
         <h3>◆ It is</h3>
         <ul>
-          <li>→ A research and monitoring dashboard for equities trading</li>
+          <li>→ A research and monitoring dashboard for equities and crypto trading</li>
           <li>→ Built to work alongside bots and strategies you already run</li>
           <li>→ A one-time purchase, yours to own and customize</li>
           <li>→ One tool among several you should be using</li>
@@ -898,6 +904,10 @@
       <details class="faq-item">
         <summary>Does BotWatch place trades for me automatically?</summary>
         <p>The included GLD bot can place paper or live trades through your connected broker if you choose to run it that way, but BotWatch itself is a research and monitoring layer, not a managed account — you're always the one deciding what runs and when.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I trade crypto with BotWatch?</summary>
+        <p>Yes — set the symbol to a crypto pair like BTC/USD instead of GLD (via Alpaca, the same broker connection you're already using) and the bot can run continuously, since crypto markets don't close the way stock markets do. "Can run 24/7" describes that technical capability, not a promise of profit — see the <a href="disclaimer.html#crypto" style="color:var(--amber);">crypto trading disclaimer</a> for the full picture.</p>
       </details>
       <details class="faq-item">
         <summary>Is my broker data safe?</summary>
