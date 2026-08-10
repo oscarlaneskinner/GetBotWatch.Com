@@ -270,6 +270,11 @@
   .price-card.featured .price-btn{background:var(--amber);color:#FFFFFF;border-color:var(--amber);}
   .price-btn:hover{border-color:var(--amber);}
   .price-card.featured .price-btn:hover{background:#4E9CFF;}
+  .price-btn-gift{
+    text-align:center;padding:11px;border-radius:8px;font-weight:600;font-size:13.5px;margin-top:10px;
+    border:1px solid var(--border);background:transparent;color:var(--text-muted);transition:all .15s ease;cursor:pointer;
+  }
+  .price-btn-gift:hover{border-color:var(--amber);color:var(--text);}
   .license-note{text-align:center;color:var(--text-faint);font-size:13px;margin-top:28px;}
 
   /* ---------- Custom services ---------- */
@@ -322,6 +327,30 @@
   .sf-confirm:disabled{opacity:0.55;cursor:not-allowed;}
   .sf-check{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text-muted);margin-bottom:20px;cursor:pointer;line-height:1.5;}
   .sf-check input{margin-top:3px;flex-shrink:0;}
+
+  /* ---------- Gift modal ---------- */
+  .gift-modal{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;max-width:460px;width:100%;
+    padding:28px 26px 24px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.7);
+  }
+  .gift-modal h3{font-family:var(--font-display);font-size:1.15rem;margin-bottom:6px;color:var(--text);}
+  .gift-modal .gift-sub{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:18px;}
+  .gift-modal .gift-callout{
+    background:var(--panel-alt);border:1px solid var(--border);border-radius:8px;padding:12px 14px;
+    font-size:12.5px;color:var(--text-muted);line-height:1.6;margin-bottom:18px;
+  }
+  .gift-modal .gift-callout strong{color:var(--amber);}
+  .gift-form{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+  .gift-form .gift-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media (max-width:480px){.gift-form .gift-row{grid-template-columns:1fr;}}
+  .gift-form input,.gift-form textarea{
+    background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 13px;color:var(--text);
+    font-family:var(--font-body);font-size:13.5px;width:100%;
+  }
+  .gift-form textarea{resize:vertical;}
+  .gift-form label{font-size:11.5px;color:var(--text-faint);margin-bottom:3px;display:block;}
+  .gift-error{font-size:12.5px;color:var(--red,#E5484D);display:none;margin-top:2px;}
+  .gift-error.show{display:block;}
 </style>
 </head>
 <body>
@@ -552,6 +581,7 @@
           <li><span class="chk">✓</span>12 months of updates</li>
         </ul>
         <a href="#" class="price-btn" data-checkout="platform">Get BotWatch — $297</a>
+        <button type="button" class="price-btn-gift" data-gift="platform">🎁 Send as a Gift</button>
       </div>
     </div>
     <p class="license-note">Licensed for personal use across the bots/accounts you control. Not financial advice — trading involves risk of loss.</p>
@@ -657,6 +687,21 @@
   </div>
 </section>
 
+<!-- Hidden static copy of the gift-request form so Netlify's build-time
+     form scanner detects it (the real submission is fired by JS from the
+     gift modal below, not this markup — but Netlify only registers forms
+     it finds in the raw HTML, so this has to physically exist). -->
+<form name="gift-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="gift-request" />
+  <input type="text" name="bot-field" />
+  <input type="text" name="tier" />
+  <input type="text" name="sender_name" />
+  <input type="email" name="sender_email" />
+  <input type="text" name="recipient_name" />
+  <input type="email" name="recipient_email" />
+  <textarea name="gift_message"></textarea>
+</form>
+
 <section class="final-cta">
   <div class="wrap">
     <h2>If you're running a bot, you already know how fast things can go wrong!</h2>
@@ -696,6 +741,47 @@
     <div class="sf-actions">
       <button type="button" class="sf-cancel" id="sf-cancel">Cancel</button>
       <button type="button" class="sf-confirm" id="sf-confirm" disabled>Continue to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<div class="sf-overlay" id="gift-overlay" role="dialog" aria-modal="true" aria-labelledby="gift-title">
+  <div class="gift-modal">
+    <h3 id="gift-title">🎁 Send BotWatch as a gift</h3>
+    <p class="gift-sub">Tell us who it's for. You'll still complete payment yourself — we just need this so the license lands with the right person.</p>
+    <div class="gift-callout">
+      <strong>Important:</strong> at checkout, enter the <strong>recipient's email address</strong> (not your own) as the checkout email. That's the address Lemon Squeezy delivers the license key to — instantly, no waiting on us. Use your own email below just so we can reach you if anything needs fixing.
+    </div>
+    <form class="gift-form" id="gift-form">
+      <div class="gift-row">
+        <div>
+          <label for="gift-sender-name">Your name</label>
+          <input type="text" id="gift-sender-name" name="sender_name" required>
+        </div>
+        <div>
+          <label for="gift-sender-email">Your email</label>
+          <input type="email" id="gift-sender-email" name="sender_email" required>
+        </div>
+      </div>
+      <div class="gift-row">
+        <div>
+          <label for="gift-recipient-name">Recipient's name</label>
+          <input type="text" id="gift-recipient-name" name="recipient_name" required>
+        </div>
+        <div>
+          <label for="gift-recipient-email">Recipient's email</label>
+          <input type="email" id="gift-recipient-email" name="recipient_email" required>
+        </div>
+      </div>
+      <div>
+        <label for="gift-message">Gift message (optional — we'll forward it)</label>
+        <textarea id="gift-message" name="gift_message" rows="3"></textarea>
+      </div>
+      <span class="gift-error" id="gift-error">Please fill in your name/email and the recipient's name/email.</span>
+    </form>
+    <div class="sf-actions">
+      <button type="button" class="sf-cancel" id="gift-cancel">Cancel</button>
+      <button type="button" class="sf-confirm" id="gift-continue">Continue to Checkout →</button>
     </div>
   </div>
 </div>
@@ -776,6 +862,92 @@
         );
       }
     });
+  });
+
+  /* "Send as a Gift" flow — collects sender/recipient details, logs
+     them to Netlify Forms as a paper trail for us, then hands off to
+     the same sales-final confirmation modal and checkout link used
+     everywhere else. Actual delivery still happens automatically via
+     whatever email the buyer enters at Lemon Squeezy checkout — the
+     callout inside the modal tells them to use the recipient's email
+     there. This form is a backup record, not the delivery mechanism. */
+  const giftOverlay = document.getElementById("gift-overlay");
+  const giftForm = document.getElementById("gift-form");
+  const giftError = document.getElementById("gift-error");
+  const giftCancel = document.getElementById("gift-cancel");
+  const giftContinue = document.getElementById("gift-continue");
+  let giftPendingTier = null;
+
+  function openGiftModal(tierKey) {
+    giftPendingTier = tierKey;
+    giftForm.reset();
+    giftError.classList.remove("show");
+    giftOverlay.classList.add("open");
+  }
+  function closeGiftModal() {
+    giftOverlay.classList.remove("open");
+    giftPendingTier = null;
+  }
+  giftCancel.addEventListener("click", closeGiftModal);
+  giftOverlay.addEventListener("click", (e) => {
+    if (e.target === giftOverlay) closeGiftModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && giftOverlay.classList.contains("open")) closeGiftModal();
+  });
+
+  document.querySelectorAll("[data-gift]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      openGiftModal(el.getAttribute("data-gift"));
+    });
+  });
+
+  giftContinue.addEventListener("click", () => {
+    const senderName = document.getElementById("gift-sender-name").value.trim();
+    const senderEmail = document.getElementById("gift-sender-email").value.trim();
+    const recipientName = document.getElementById("gift-recipient-name").value.trim();
+    const recipientEmail = document.getElementById("gift-recipient-email").value.trim();
+    const giftMessage = document.getElementById("gift-message").value.trim();
+
+    if (!senderName || !senderEmail || !recipientName || !recipientEmail) {
+      giftError.classList.add("show");
+      return;
+    }
+    giftError.classList.remove("show");
+
+    const tierKey = giftPendingTier;
+    const checkoutUrl = CHECKOUT_LINKS[tierKey];
+
+    // Log the gift request to Netlify Forms (fire-and-forget — never
+    // blocks checkout even if this fails, e.g. offline preview/testing).
+    const body = new URLSearchParams({
+      "form-name": "gift-request",
+      tier: tierKey || "",
+      sender_name: senderName,
+      sender_email: senderEmail,
+      recipient_name: recipientName,
+      recipient_email: recipientEmail,
+      gift_message: giftMessage
+    });
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    }).catch(() => { /* non-blocking */ });
+
+    closeGiftModal();
+
+    if (checkoutUrl) {
+      openSalesFinalModal(checkoutUrl);
+    } else {
+      alert(
+        "Checkout link not set yet for '" + tierKey + "'.\n\n" +
+        "Open index.html, find the CHECKOUT_LINKS block near the " +
+        "bottom, and paste in your Gumroad or Lemon Squeezy link " +
+        "for this tier. Your gift details were still logged."
+      );
+    }
   });
 
   /* =========================================================
