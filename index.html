@@ -19,6 +19,20 @@
 <meta name="twitter:image" content="https://getbotwatch.com/screenshots/test-a-strategy.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- =========================================================
+     ANALYTICS (optional, off by default) — inactive until you
+     uncomment it below and fill in your own site domain.
+     -----------------------------------------------------------
+     Plausible is privacy-respecting: no cookies, no personal data
+     collection, GDPR-compliant by default — matches this site's
+     "no telemetry" trust story better than Google Analytics would.
+     1. Create a free account at https://plausible.io
+     2. Add getbotwatch.com as a site there
+     3. Uncomment the script tag below and replace YOURDOMAIN
+     ========================================================= -->
+<!-- <script defer data-domain="YOURDOMAIN" src="https://plausible.io/js/script.js"></script> -->
+
 <style>
   :root{
     --bg:#0B0F17;
@@ -299,6 +313,26 @@
   .services-note{
     margin-top:24px;font-size:13.5px;color:var(--text-faint);max-width:680px;line-height:1.7;
   }
+
+  /* ---------- Newsletter / lead capture ---------- */
+  .newsletter{padding:0 0 60px;}
+  .newsletter-box{
+    max-width:640px;margin:0 auto;background:var(--panel);border:1px solid var(--border);
+    border-radius:14px;padding:32px 34px;text-align:center;
+  }
+  .newsletter-box h3{font-family:var(--font-display);font-size:20px;margin-bottom:8px;}
+  .newsletter-box p{color:var(--text-muted);font-size:14px;margin-bottom:20px;}
+  .newsletter-form{display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .newsletter-form input[type="email"]{
+    flex:1;min-width:220px;background:var(--bg);border:1px solid var(--border);border-radius:8px;
+    padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;
+  }
+  .newsletter-form button{
+    background:var(--amber);color:#fff;border:1px solid var(--amber);border-radius:8px;
+    padding:12px 20px;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;
+  }
+  .newsletter-form button:hover{background:#4E9CFF;}
+  .newsletter-note{font-size:12px;color:var(--text-faint);margin-top:14px;}
 
   /* ---------- Final CTA ---------- */
   .final-cta{text-align:center;padding:100px 0;}
@@ -943,6 +977,22 @@
   <input type="email" name="recipient_email" />
   <textarea name="gift_message"></textarea>
 </form>
+
+<section class="newsletter">
+  <div class="wrap">
+    <div class="newsletter-box">
+      <h3>Not ready to buy yet?</h3>
+      <p>Get occasional updates on new features, V2 progress, and the occasional tip — no spam, unsubscribe any time.</p>
+      <form name="newsletter-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form">
+        <input type="hidden" name="form-name" value="newsletter-signup" />
+        <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit">Notify Me</button>
+      </form>
+      <div class="newsletter-note">We'll only email you about BotWatch — see our <a href="privacy.html" style="color:var(--text-faint);text-decoration:underline;">privacy policy</a>.</div>
+    </div>
+  </div>
+</section>
 
 <section class="final-cta">
   <div class="wrap">
