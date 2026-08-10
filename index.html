@@ -297,6 +297,31 @@
   .footer-disclaimer{font-size:12.5px;color:var(--text-faint);max-width:640px;line-height:1.7;}
   .footer-links{display:flex;gap:20px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;}
   .footer-bottom{margin-top:28px;font-size:12px;color:var(--text-faint);}
+
+  /* ---------- Sales-final confirmation modal ---------- */
+  .sf-overlay{
+    display:none;position:fixed;inset:0;background:rgba(6,9,15,0.72);backdrop-filter:blur(3px);
+    z-index:200;align-items:center;justify-content:center;padding:20px;
+  }
+  .sf-overlay.open{display:flex;}
+  .sf-modal{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;max-width:440px;width:100%;
+    padding:28px 26px 24px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.7);
+  }
+  .sf-modal h3{font-family:var(--font-display);font-size:1.15rem;margin-bottom:10px;color:var(--text);}
+  .sf-modal p{font-size:13.5px;color:var(--text-muted);line-height:1.65;margin-bottom:10px;}
+  .sf-modal .sf-reason{font-size:12px;color:var(--text-faint);margin-bottom:18px;}
+  .sf-actions{display:flex;gap:10px;margin-top:6px;}
+  .sf-actions button{
+    flex:1;font-family:var(--font-body);font-size:14px;font-weight:600;border-radius:8px;padding:12px 14px;cursor:pointer;
+  }
+  .sf-cancel{background:transparent;border:1px solid var(--border);color:var(--text-muted);}
+  .sf-cancel:hover{border-color:var(--text-faint);}
+  .sf-confirm{background:var(--amber);border:1px solid var(--amber);color:#fff;}
+  .sf-confirm:hover{background:var(--amber-dim);}
+  .sf-confirm:disabled{opacity:0.55;cursor:not-allowed;}
+  .sf-check{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text-muted);margin-bottom:20px;cursor:pointer;line-height:1.5;}
+  .sf-check input{margin-top:3px;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -659,6 +684,21 @@
   </div>
 </footer>
 
+<div class="sf-overlay" id="sf-overlay" role="dialog" aria-modal="true" aria-labelledby="sf-title">
+  <div class="sf-modal">
+    <h3 id="sf-title">All sales are final</h3>
+    <p>BotWatch is a digital product — your license key and full download are delivered instantly. Because of that, we're not able to offer refunds once a purchase is complete.</p>
+    <p class="sf-reason">(Reason: digital products can't be "returned" once downloaded.)</p>
+    <label class="sf-check">
+      <input type="checkbox" id="sf-agree" />
+      I understand this purchase is final and non-refundable.
+    </label>
+    <div class="sf-actions">
+      <button type="button" class="sf-cancel" id="sf-cancel">Cancel</button>
+      <button type="button" class="sf-confirm" id="sf-confirm" disabled>Continue to Checkout</button>
+    </div>
+  </div>
+</div>
 
 <script>
   /* =========================================================
@@ -684,22 +724,58 @@
     hours5:   ""   // Custom work - 5 Hour Block, $675
   };
 
+  /* Sales-final confirmation modal — every checkout button routes
+     through this before actually leaving the page, so buyers see
+     and acknowledge the no-refunds policy at the point of intent. */
+  const sfOverlay = document.getElementById("sf-overlay");
+  const sfAgree = document.getElementById("sf-agree");
+  const sfConfirm = document.getElementById("sf-confirm");
+  const sfCancel = document.getElementById("sf-cancel");
+  let sfPendingUrl = null;
+
+  function openSalesFinalModal(url) {
+    sfPendingUrl = url;
+    sfAgree.checked = false;
+    sfConfirm.disabled = true;
+    sfOverlay.classList.add("open");
+  }
+  function closeSalesFinalModal() {
+    sfOverlay.classList.remove("open");
+    sfPendingUrl = null;
+  }
+  sfAgree.addEventListener("change", () => {
+    sfConfirm.disabled = !sfAgree.checked;
+  });
+  sfCancel.addEventListener("click", closeSalesFinalModal);
+  sfOverlay.addEventListener("click", (e) => {
+    if (e.target === sfOverlay) closeSalesFinalModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sfOverlay.classList.contains("open")) closeSalesFinalModal();
+  });
+  sfConfirm.addEventListener("click", () => {
+    if (!sfPendingUrl) return;
+    const url = sfPendingUrl;
+    closeSalesFinalModal();
+    window.location.href = url;
+  });
+
   document.querySelectorAll("[data-checkout]").forEach((el) => {
     const key = el.getAttribute("data-checkout");
     const url = CHECKOUT_LINKS[key];
-    if (url) {
-      el.setAttribute("href", url);
-    } else {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (url) {
+        openSalesFinalModal(url);
+      } else {
         alert(
           "Checkout link not set yet for '" + key + "'.\n\n" +
           "Open index.html, find the CHECKOUT_LINKS block near the " +
           "bottom, and paste in your Gumroad or Lemon Squeezy link " +
           "for this tier."
         );
-      });
-    }
+      }
+    });
   });
 
   /* =========================================================
