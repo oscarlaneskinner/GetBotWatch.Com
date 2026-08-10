@@ -96,12 +96,6 @@
   .toc li a:hover{color:var(--amber);}
   .toc li::before{content:counter(toc, decimal-leading-zero) "  ";font-family:var(--font-mono);color:var(--amber);font-size:12.5px;}
 
-  .lawyer-note{
-    margin-top:60px;padding:22px 24px;border:1px dashed var(--border);border-radius:10px;
-    font-size:13.5px;color:var(--text-faint);
-  }
-  .lawyer-note strong{color:var(--text-muted);}
-
   footer{border-top:1px solid var(--border);padding:36px 0;}
   .footer-links{display:flex;gap:20px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;margin-bottom:16px;}
   .footer-links a{color:var(--text-muted);}
@@ -122,7 +116,7 @@
   <div class="wrap">
     <span class="eyebrow">Legal</span>
     <h1>Disclaimer &amp; Terms of Service</h1>
-    <div class="updated">Last updated: [Month] [Year] &nbsp;·&nbsp; Draft for attorney review — not yet legally finalized</div>
+    <div class="updated">Last updated: 08/2026</div>
   </div>
 </div>
 
@@ -144,6 +138,7 @@
         <li><a href="#customization">Customization is your responsibility</a></li>
         <li><a href="#no-managed">No managed accounts</a></li>
         <li><a href="#international">International use &amp; jurisdiction</a></li>
+        <li><a href="#crypto">Cryptocurrency trading</a></li>
         <li><a href="#license">License terms</a></li>
         <li><a href="#custom-services">Custom services disclaimer</a></li>
         <li><a href="#affiliate">Affiliate disclosure</a></li>
@@ -192,8 +187,18 @@
       <p style="font-size:13px;color:var(--text-faint);">In compliance with U.S. export control regulations, BotWatch is not available for purchase by individuals or entities located in, or ordinarily resident in, countries subject to U.S. trade sanctions or embargoes.</p>
     </section>
 
+    <section class="doc-section" id="crypto">
+      <h2><span class="num">07</span>Cryptocurrency Trading</h2>
+      <div class="callout red">
+        <p>If you configure BotWatch to trade cryptocurrency, you are trading a fundamentally different and typically more volatile asset class than equities or ETFs like GLD. Cryptocurrency prices can move sharply and unpredictably, including outside of traditional stock-market hours, and past price behavior is not indicative of future results.</p>
+      </div>
+      <p>Cryptocurrency markets are largely unregulated, or regulated differently than traditional securities markets, and typically offer fewer investor protections. Depending on your jurisdiction, cryptocurrency may not be classified as a security, and different tax, custody, and reporting rules may apply. You are solely responsible for understanding and complying with the laws applicable to cryptocurrency trading in your own jurisdiction.</p>
+      <p>Some marketing on this site describes BotWatch as capable of running continuously on crypto markets that never close ("24/7"). This describes a technical capability only — it is not a guarantee of profit, a recommendation to trade around the clock, or an assurance that continuous, unattended operation reduces risk. Continuous trading can compound losses just as easily as gains.</p>
+      <p style="font-size:13px;color:var(--text-faint);">All other sections of this disclaimer — including "Not Financial Advice," "No Guarantee of Performance," and "Limitation of Liability" — apply equally to cryptocurrency trading conducted through this software.</p>
+    </section>
+
     <section class="doc-section" id="license">
-      <h2><span class="num">07</span>License Terms</h2>
+      <h2><span class="num">08</span>License Terms</h2>
       <ul class="plain">
         <li><span class="mk">→</span>Your purchase grants a personal, non-transferable license to use the software across the bots and accounts you personally control.</li>
         <li><span class="mk">→</span>Every license includes full source code access and 12 months of updates — there is no lower tier with reduced access.</li>
@@ -209,7 +214,7 @@
     </section>
 
     <section class="doc-section" id="custom-services">
-      <h2><span class="num">08</span>Custom Services Disclaimer</h2>
+      <h2><span class="num">09</span>Custom Services Disclaimer</h2>
       <p>This disclaimer applies to <strong>all services</strong>, not just the software license — including setup assistance, custom code changes, and bot/strategy integrations performed by us.</p>
       <div class="callout red">
         <p>Any custom development or configuration work is provided as software development work only. It does not constitute financial advice, a recommendation of any strategy, or any assurance of trading performance or outcome. We are not responsible for trading losses resulting from the use of any custom configuration, whether implemented by you, by us, or with the assistance of any third-party AI tool.</p>
@@ -218,26 +223,21 @@
     </section>
 
     <section class="doc-section" id="affiliate">
-      <h2><span class="num">09</span>Affiliate Disclosure</h2>
+      <h2><span class="num">10</span>Affiliate Disclosure</h2>
       <div class="callout teal">
         <p>Some links on this site are affiliate/referral links (e.g., to TradingView or Alpaca). If you sign up through these links, we may earn a commission at no additional cost to you. We only link to tools we actually use or believe are relevant to traders using this platform.</p>
       </div>
     </section>
 
     <section class="doc-section" id="liability">
-      <h2><span class="num">10</span>Limitation of Liability</h2>
+      <h2><span class="num">11</span>Limitation of Liability</h2>
       <p>The software is provided "as is," without warranty of any kind, express or implied, including but not limited to fitness for a particular trading strategy or outcome. To the maximum extent permitted by law, Our total liability for any claim arising from use of the software or services is limited to the amount you paid. We are not liable for any trading losses, lost profits, or indirect or consequential damages arising from use of the software, whether or not customized, and whether the customization was performed by you, by us, or with the assistance of any AI tool.</p>
-      <p style="font-size:13px;color:var(--text-faint);">Governing law and dispute resolution: [to be finalized with attorney review — typically your state's law, with an optional arbitration clause].</p>
     </section>
 
     <section class="doc-section" id="contact">
-      <h2><span class="num">11</span>Contact</h2>
+      <h2><span class="num">12</span>Contact</h2>
       <p>Questions about these terms or the disclaimer can be sent to <a href="mailto:hello@getbotwatch.com">hello@getbotwatch.com</a>.</p>
     </section>
-
-    <div class="lawyer-note">
-      <strong>Note for the site owner:</strong> this page is a starting draft, not a finished legal document. Have a securities/tech attorney review it before publishing — particularly the "not investment advice" framing, and whether any specific feature of the platform (e.g., pre-built strategy templates, alerts, or performance-adjacent language) could be interpreted as crossing into investment advice territory. Replace all bracketed placeholders before launch.
-    </div>
 
   </div>
 </main>
