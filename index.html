@@ -177,6 +177,10 @@
   /* ---------- Customize section ---------- */
   .customize-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
   @media (max-width:900px){.customize-grid{grid-template-columns:1fr;}}
+  .screenshot{
+    width:100%;border-radius:12px;border:1px solid var(--border);
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);display:block;
+  }
   .code-block{
     background:#0A0F18;border:1px solid var(--border);border-radius:12px;overflow:hidden;
   }
@@ -389,23 +393,8 @@
         <li><span class="chk">✓</span>Prefer not to touch the code? Custom changes are available as a separate paid service — see below.</li>
       </ul>
     </div>
-    <div class="code-block">
-      <div class="code-head">
-        <span class="dotx r"></span><span class="dotx y"></span><span class="dotx g"></span>
-        <span class="fname">config/account.py</span>
-      </div>
-      <div class="code-body"><span class="c1"># Tell BotWatch how you actually trade —</span><br>
-<span class="c1"># then ask your AI assistant to tune the rest.</span><br><br>
-<span class="c4">STARTING_ACCOUNT_SIZE</span> = <span class="c3">25_000</span><br>
-<span class="c4">MAX_DRAWDOWN_PCT</span> = <span class="c3">8.0</span><br>
-<span class="c4">MAX_POSITION_EXPOSURE</span> = <span class="c3">2.0</span><span class="c1">  # x average size</span><br>
-<span class="c4">ALERT_ON_LATENCY_MS</span> = <span class="c3">500</span><br><br>
-<span class="c1">## → "Claude, adjust MAX_DRAWDOWN_PCT to</span><br>
-<span class="c1">##    match my risk tolerance and explain</span><br>
-<span class="c1">##    what changes downstream."</span><br>
-<span class="c2">✓ config saved — dashboard updated</span>
-      </div>
-    </div>
+    <img class="screenshot" src="screenshots/test-a-strategy.png"
+      alt="BotWatch's Test a Strategy tab: symbol selection, risk settings, and 7 built-in strategy models plus Upload Your Own">
   </div>
 </section>
 
@@ -421,6 +410,30 @@
         <div class="fail" style="color:var(--teal);">◆ GOOD TO KNOW</div>
         <h3>🛠️ Not limited to gold</h3>
         <p>The included bot was built to trade the GLD ETF, but the code is yours — modify it to trade any other commodity or stock, or use it as a starting template to build an entirely new bot from scratch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">See it in action</span>
+      <h2>More of the dashboard</h2>
+      <p>A closer look at a few of the tabs you get with every license.</p>
+    </div>
+    <div class="why-grid">
+      <div>
+        <img class="screenshot" src="screenshots/batch-test.png" alt="BotWatch's Batch Test tab: testing several symbols at once with the same settings">
+        <p style="margin-top:10px;font-size:13.5px;color:var(--text-muted);">Test several symbols at once with the same settings.</p>
+      </div>
+      <div>
+        <img class="screenshot" src="screenshots/connect-account.png" alt="BotWatch's Connect Account tab: entering and saving broker credentials locally">
+        <p style="margin-top:10px;font-size:13.5px;color:var(--text-muted);">Connect your broker — keys stay local to your machine.</p>
+      </div>
+      <div>
+        <img class="screenshot" src="screenshots/ask-claude.png" alt="BotWatch's Ask Claude tab: free or integrated AI help with your results">
+        <p style="margin-top:10px;font-size:13.5px;color:var(--text-muted);">Ask Claude about your results — free, or integrated in-app.</p>
       </div>
     </div>
   </div>
