@@ -14,15 +14,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0E141F;
-    --panel:#161D2C;
-    --panel-alt:#1C2438;
-    --border:#2A3348;
-    --text:#E7EBF3;
-    --text-muted:#8D96AC;
-    --text-faint:#5C6580;
-    --amber:#E8A33D;
-    --amber-dim:#8A6526;
+    --bg:#0B0F17;
+    --panel:#131A26;
+    --panel-alt:#182130;
+    --border:#28344A;
+    --text:#E9EEF6;
+    --text-muted:#8D9BB4;
+    --text-faint:#59647C;
+    --amber:#2F8AF5;
+    --amber-dim:#1E5CA8;
     --teal:#47C2A0;
     --red:#E2604F;
     --font-display:'Space Grotesk', sans-serif;
@@ -78,40 +78,16 @@
   .navlinks a:hover{color:var(--text);}
   .nav-cta{
     font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;
-    background:var(--amber);color:#181205;
+    background:var(--amber);color:#FFFFFF;
     transition:transform .15s ease, background .15s ease;
   }
-  .nav-cta:hover{background:#f0af52;transform:translateY(-1px);}
+  .nav-cta:hover{background:#4E9CFF;transform:translateY(-1px);}
   @media (max-width:760px){.navlinks{display:none;}}
 
-  /* ---------- Signal ticker (signature element) ---------- */
-  .ticker-wrap{
-    background:#0A0F18;border-bottom:1px solid var(--border);
-    overflow:hidden;position:relative;height:34px;display:flex;align-items:center;
-  }
-  .ticker-wrap::before,.ticker-wrap::after{
-    content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
-  }
-  .ticker-wrap::before{left:0;background:linear-gradient(90deg,#0A0F18, transparent);}
-  .ticker-wrap::after{right:0;background:linear-gradient(270deg,#0A0F18, transparent);}
-  .ticker-track{
-    display:flex;gap:48px;white-space:nowrap;
-    font-family:var(--font-mono);font-size:12px;color:var(--text-faint);
-    animation:ticker 32s linear infinite;
-    padding-left:100%;
-  }
-  .ticker-track span{display:flex;align-items:center;gap:8px;}
   .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
   .dot.ok{background:var(--teal);}
   .dot.warn{background:var(--amber);}
   .dot.alert{background:var(--red);}
-  @keyframes ticker{
-    from{transform:translateX(0);}
-    to{transform:translateX(-100%);}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .ticker-track{animation:none;padding-left:24px;}
-  }
 
   /* ---------- Hero ---------- */
   .hero{padding:88px 0 72px;position:relative;}
@@ -122,7 +98,7 @@
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--font-mono);font-size:12px;color:var(--amber);
-    background:rgba(232,163,61,0.08);border:1px solid rgba(232,163,61,0.25);
+    background:rgba(47,138,245,0.08);border:1px solid rgba(47,138,245,0.25);
     padding:6px 12px;border-radius:20px;margin-bottom:22px;
   }
   .hero h1{
@@ -134,11 +110,11 @@
   }
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
   .btn-primary{
-    background:var(--amber);color:#181205;font-weight:600;font-size:15px;
+    background:var(--amber);color:#FFFFFF;font-weight:600;font-size:15px;
     padding:14px 26px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;
     transition:transform .15s ease, background .15s ease;
   }
-  .btn-primary:hover{background:#f0af52;transform:translateY(-1px);}
+  .btn-primary:hover{background:#4E9CFF;transform:translateY(-1px);}
   .btn-secondary{
     border:1px solid var(--border);color:var(--text);font-size:15px;font-weight:500;
     padding:14px 24px;border-radius:8px;transition:border-color .15s ease, background .15s ease;
@@ -167,9 +143,9 @@
   .card-value.teal{color:var(--teal);}
   .card-sub{font-size:11px;color:var(--text-faint);margin-top:2px;}
   .alert-row{
-    background:rgba(232,163,61,0.08);border:1px solid rgba(232,163,61,0.3);
+    background:rgba(47,138,245,0.08);border:1px solid rgba(47,138,245,0.3);
     border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;
-    font-size:12.5px;color:#F0C480;
+    font-size:12.5px;color:#AFD3FF;
   }
   .alert-row .dot.warn{flex-shrink:0;}
 
@@ -186,6 +162,8 @@
   .why{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   @media (max-width:860px){.why-grid{grid-template-columns:1fr;}}
+  .promo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:760px){.promo-grid{grid-template-columns:1fr;}}
   .why-card{
     background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:24px;
   }
@@ -258,10 +236,10 @@
   }
   .price-card.featured{
     border-color:var(--amber);position:relative;
-    background:linear-gradient(180deg, rgba(232,163,61,0.06), var(--panel) 40%);
+    background:linear-gradient(180deg, rgba(47,138,245,0.06), var(--panel) 40%);
   }
   .badge{
-    position:absolute;top:-12px;left:26px;background:var(--amber);color:#181205;
+    position:absolute;top:-12px;left:26px;background:var(--amber);color:#FFFFFF;
     font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;
     font-family:var(--font-mono);letter-spacing:.02em;
   }
@@ -280,9 +258,9 @@
     text-align:center;padding:12px;border-radius:8px;font-weight:600;font-size:14px;
     border:1px solid var(--border);transition:all .15s ease;
   }
-  .price-card.featured .price-btn{background:var(--amber);color:#181205;border-color:var(--amber);}
+  .price-card.featured .price-btn{background:var(--amber);color:#FFFFFF;border-color:var(--amber);}
   .price-btn:hover{border-color:var(--amber);}
-  .price-card.featured .price-btn:hover{background:#f0af52;}
+  .price-card.featured .price-btn:hover{background:#4E9CFF;}
   .license-note{text-align:center;color:var(--text-faint);font-size:13px;margin-top:28px;}
 
   /* ---------- Custom services ---------- */
@@ -319,25 +297,12 @@
     <div class="brand"><span class="brand-mark"></span>BotWatch<span class="v-badge">v1</span></div>
     <nav class="navlinks">
       <a href="#why">Why It Matters</a>
-      <a href="#customize">Customization</a>
+      <a href="#included">What's Included</a>
       <a href="#pricing">Pricing</a>
+      <a href="#gift-packs">Gift Packs</a>
       <a href="#services">Custom Work</a>
     </nav>
-    <a href="#pricing" class="nav-cta" data-checkout="botTrader">Get Access</a>
-  </div>
-  <div class="ticker-wrap" aria-hidden="true">
-    <div class="ticker-track">
-      <span><span class="dot ok"></span>14:32:01 — AAPL position opened, 40 shares</span>
-      <span><span class="dot warn"></span>14:32:14 — Drawdown approaching 6% threshold</span>
-      <span><span class="dot ok"></span>14:33:02 — Bot heartbeat received, latency 84ms</span>
-      <span><span class="dot alert"></span>14:33:40 — Order fill delayed 11s, flagged for review</span>
-      <span><span class="dot ok"></span>14:34:05 — Strategy A within normal parameters</span>
-      <span><span class="dot warn"></span>14:35:22 — Position size 2.4x average, exposure alert</span>
-      <span><span class="dot ok"></span>14:36:01 — AAPL position opened, 40 shares</span>
-      <span><span class="dot warn"></span>14:36:14 — Drawdown approaching 6% threshold</span>
-      <span><span class="dot ok"></span>14:37:02 — Bot heartbeat received, latency 84ms</span>
-      <span><span class="dot alert"></span>14:37:40 — Order fill delayed 11s, flagged for review</span>
-    </div>
+    <a href="#pricing" class="nav-cta" data-checkout="platform">Get Access</a>
   </div>
 </header>
 
@@ -348,7 +313,7 @@
       <h1>Know what your bot is <span class="accent">actually doing</span> — before it costs you.</h1>
       <p class="sub">BotWatch is a research and monitoring dashboard that sits alongside your trading bots. One tool in your stack, not a promise of profit — the visibility layer most bot traders wish they'd had after something already went wrong.</p>
       <div class="hero-ctas">
-        <a href="#pricing" class="btn-primary" data-checkout="botTrader">Get Lifetime Access →</a>
+        <a href="#pricing" class="btn-primary" data-checkout="platform">Get Lifetime Access →</a>
         <a href="#customize" class="btn-secondary">See how it customizes</a>
       </div>
       <div class="hero-note">One-time license. No subscription. Not financial advice.</div>
@@ -444,6 +409,23 @@
   </div>
 </section>
 
+<section id="flexibility" style="padding-top:0;">
+  <div class="wrap">
+    <div class="promo-grid">
+      <div class="why-card">
+        <div class="fail" style="color:var(--teal);">◆ GOOD TO KNOW</div>
+        <h3>📱 Track your bot from your phone</h3>
+        <p>Want to check in on the go? Just connect your bot to your trading account and you can track its performance right from your mobile device.</p>
+      </div>
+      <div class="why-card">
+        <div class="fail" style="color:var(--teal);">◆ GOOD TO KNOW</div>
+        <h3>🛠️ Not limited to gold</h3>
+        <p>The included bot was built to trade the GLD ETF, but the code is yours — modify it to trade any other commodity or stock, or use it as a starting template to build an entirely new bot from scratch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="isnt">
   <div class="wrap">
     <div class="section-head">
@@ -485,54 +467,103 @@
   </div>
 </section>
 
+<section id="included">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">What's included</span>
+      <h2>The platform, plus a bot ready to run.</h2>
+      <p>Every license includes the full research and monitoring dashboard — and a pre-built strategy bot so you have something real to test, learn from, and customize from day one.</p>
+    </div>
+    <div style="max-width:420px;margin:0 auto;">
+      <div class="why-card">
+        <div class="fail" style="color:var(--teal);">◆ INCLUDED BOT</div>
+        <h3>GLD Trend Bot</h3>
+        <p>Tracks trend signals on GLD (gold) to inform entries and exits. A clear, well-documented starting strategy to study or adapt.</p>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:13px;color:var(--text-faint);max-width:680px;">This bot is provided as starting-point code, not a signal service or a promise of performance. Like the platform itself, it's meant to be reviewed, tested in a paper-trading environment, and customized to your own strategy before any live use — see the <a href="disclaimer.html" style="color:var(--amber);">full disclaimer</a>.</p>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Pricing</span>
       <h2>One-time license. No subscription.</h2>
-      <p>Pick the tier that matches how you trade — the Bot Trader tier is built specifically around the risk-monitoring problem this page opened with.</p>
+      <p>The platform and the GLD Trend Bot, in a single bundle — built specifically around the risk-monitoring problem this page opened with.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="price-card">
-        <div class="price-tier">Core</div>
-        <div class="price-amount">$297</div>
-        <div class="price-desc">For general research and analysis use.</div>
-        <ul class="price-list">
-          <li><span class="chk">✓</span>Full dashboard + research platform</li>
-          <li><span class="chk">✓</span>Standard indicators and views</li>
-          <li><span class="chk">✓</span>Documentation + setup guide</li>
-          <li><span class="chk">✓</span>6 months of updates</li>
-        </ul>
-        <a href="#" class="price-btn" data-checkout="core">Get Core</a>
-      </div>
+    <div style="max-width:520px;margin:0 auto;">
       <div class="price-card featured">
-        <span class="badge">MOST POPULAR</span>
-        <div class="price-tier">Bot Trader</div>
-        <div class="price-amount">$597</div>
-        <div class="price-desc">Built for anyone running automated strategies.</div>
+        <span class="badge">LAUNCH BUNDLE</span>
+        <div class="price-tier">BotWatch Platform + GLD Bot</div>
+        <div class="price-amount">$297</div>
+        <div class="price-desc">Everything included, one license, yours to customize.</div>
+
         <ul class="price-list">
-          <li><span class="chk">✓</span>Everything in Core</li>
-          <li><span class="chk">✓</span>Bot monitoring & risk views</li>
-          <li><span class="chk">✓</span>Drawdown + exposure alerts</li>
-          <li><span class="chk">✓</span>Heartbeat / latency anomaly detection</li>
+          <li><span class="chk">✓</span>Full research + monitoring dashboard</li>
+          <li><span class="chk">✓</span>Drawdown, exposure &amp; latency alerts</li>
+          <li><span class="chk">✓</span>GLD Trend Bot included</li>
+          <li><span class="chk">✓</span>Full code — yours to customize</li>
+          <li><span class="chk">✓</span>Documentation + setup guide</li>
           <li><span class="chk">✓</span>12 months of updates</li>
         </ul>
-        <a href="#" class="price-btn" data-checkout="botTrader">Get Bot Trader</a>
-      </div>
-      <div class="price-card">
-        <div class="price-tier">Full Access</div>
-        <div class="price-amount">$997</div>
-        <div class="price-desc">For power users building heavily on top of it.</div>
-        <ul class="price-list">
-          <li><span class="chk">✓</span>Everything in Bot Trader</li>
-          <li><span class="chk">✓</span>Full source access</li>
-          <li><span class="chk">✓</span>Priority support window</li>
-          <li><span class="chk">✓</span>Early access to updates</li>
-        </ul>
-        <a href="#" class="price-btn" data-checkout="fullAccess">Get Full Access</a>
+        <a href="#" class="price-btn" data-checkout="platform">Get BotWatch — $297</a>
       </div>
     </div>
     <p class="license-note">Licensed for personal use across the bots/accounts you control. Not financial advice — trading involves risk of loss.</p>
+  </div>
+</section>
+
+<section id="gift-packs" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Buying for family or friends?</span>
+      <h2>Give the gift of learning to invest.</h2>
+      <p>Every additional license gets a little cheaper — each one is a separate, full license with its own key, ready to give.</p>
+    </div>
+    <table class="svc" style="max-width:720px;margin:0 auto;">
+      <thead>
+        <tr><th>Licenses</th><th>Price</th><th>Per license</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td style="color:var(--text-muted);font-family:var(--font-mono);text-align:left;">$297</td>
+          <td style="color:var(--text-faint);font-family:var(--font-mono);text-align:left;">$297</td>
+          <td style="text-align:right;"><a href="#" data-checkout="platform" style="color:var(--amber);font-size:13px;font-weight:600;">Get 1 →</a></td>
+        </tr>
+        <tr>
+          <td>2 — Gift Duo</td>
+          <td style="color:var(--text-muted);font-family:var(--font-mono);text-align:left;">$554</td>
+          <td style="color:var(--text-faint);font-family:var(--font-mono);text-align:left;">$277</td>
+          <td style="text-align:right;"><a href="#" data-checkout="duo" style="color:var(--amber);font-size:13px;font-weight:600;">Get 2 →</a></td>
+        </tr>
+        <tr>
+          <td>3 — Family Pack</td>
+          <td style="color:var(--text-muted);font-family:var(--font-mono);text-align:left;">$776</td>
+          <td style="color:var(--text-faint);font-family:var(--font-mono);text-align:left;">$259</td>
+          <td style="text-align:right;"><a href="#" data-checkout="family3" style="color:var(--amber);font-size:13px;font-weight:600;">Get 3 →</a></td>
+        </tr>
+        <tr>
+          <td>4 — Family 4-Pack</td>
+          <td style="color:var(--amber);font-family:var(--font-mono);font-weight:600;text-align:left;">$999</td>
+          <td style="color:var(--text-faint);font-family:var(--font-mono);text-align:left;">$250</td>
+          <td style="text-align:right;"><a href="#" data-checkout="family4" style="color:var(--amber);font-size:13px;font-weight:600;">Get 4 →</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="license-note">Each license is a separate, full copy with its own key — not a shared install. Not financial advice.</p>
+  </div>
+</section>
+
+<section id="v2-offer" style="padding-top:0;">
+  <div class="wrap">
+    <div style="max-width:720px;margin:0 auto;background:linear-gradient(135deg, rgba(47,138,245,0.10), var(--panel) 55%);border:1px solid var(--amber);border-radius:14px;padding:32px 34px;">
+      <div style="font-family:var(--font-mono);font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Early Adopter Offer — ends Dec 31, 2026</div>
+      <h3 style="font-family:var(--font-display);font-size:24px;margin-bottom:12px;">Lock in $99 pricing on BotWatch V2.</h3>
+      <p style="color:var(--text-muted);font-size:15px;margin-bottom:16px;">Buy any BotWatch license by December 31, 2026 and you'll be able to upgrade to V2 — real-time news integration, additional indicators, and expanded AI strategy learning — for just <strong style="color:var(--text);">$99</strong> when it releases, instead of the <strong style="color:var(--text);">$999</strong> full price new customers will pay. Every license in a multi-pack qualifies, so gift recipients lock in the same offer.</p>
+      <p style="font-size:12.5px;color:var(--text-faint);">No release date is being promised — this locks in your upgrade price, whenever V2 ships. Buy after Dec 31, 2026 and V2 will be available at full price when it's released.</p>
+    </div>
   </div>
 </section>
 
@@ -540,19 +571,15 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Prefer it done for you?</span>
-      <h2>Custom work, priced upfront</h2>
-      <p>Self-customization is included with every license. If you'd rather not touch the code, these are scoped and quoted before any charge.</p>
+      <h2>Custom work, billed hourly</h2>
+      <p>Self-customization is included with your license. If you'd rather not touch the code yourself, custom changes are available separately — scoped and quoted before any charge.</p>
     </div>
     <table class="svc">
       <thead>
         <tr><th>Service</th><th>Price</th></tr>
       </thead>
       <tbody>
-        <tr><td>Setup / installation help</td><td>$99 flat</td></tr>
-        <tr><td>Minor custom change (e.g. account size logic, a threshold)</td><td>$150 flat</td></tr>
-        <tr><td>Add a new bot / strategy integration</td><td>$500 flat</td></tr>
-        <tr><td>Custom development (anything outside the above)</td><td>$125/hr, 2-hr min</td></tr>
-        <tr><td>Ongoing "done for you" support</td><td>$500/mo retainer</td></tr>
+        <tr><td>Custom code changes / edits (setup help, tweaks, new bot logic, anything else)</td><td>$135/hr, 2-hr minimum</td></tr>
       </tbody>
     </table>
     <p class="services-note">All custom work is limited to the dashboard, research, and monitoring layer, and is provided as software development only — not financial advice, and not a guarantee of trading outcomes. Every engagement includes the same disclaimer as the platform itself.</p>
@@ -563,7 +590,7 @@
   <div class="wrap">
     <h2>If you're running a bot, you already know how fast things can go wrong.</h2>
     <p>BotWatch won't trade for you and won't promise you a return. It'll show you what's actually happening — so you can catch it before it costs you.</p>
-    <a href="#pricing" class="btn-primary" data-checkout="botTrader">Get Lifetime Access →</a>
+    <a href="#pricing" class="btn-primary" data-checkout="platform">Get Lifetime Access →</a>
   </div>
 </section>
 
@@ -576,6 +603,7 @@
       <div class="footer-links">
         <a href="#why">Why It Matters</a>
         <a href="#pricing">Pricing</a>
+      <a href="#gift-packs">Gift Packs</a>
         <a href="#services">Custom Work</a>
         <a href="disclaimer.html">Full Disclaimer</a>
         <a href="privacy.html">Privacy Policy</a>
@@ -602,9 +630,10 @@
      "#" silently once you go live.
      ========================================================= */
   const CHECKOUT_LINKS = {
-    core:      "",   // e.g. "https://gumroad.com/l/botwatch-core"
-    botTrader: "",   // e.g. "https://gumroad.com/l/botwatch-bot-trader"
-    fullAccess:""    // e.g. "https://gumroad.com/l/botwatch-full-access"
+    platform: "",  // Single license, $297. e.g. "https://getbotwatch.lemonsqueezy.com/buy/xxxxx"
+    duo:      "",  // 2-pack "Gift Duo", $554
+    family3:  "",  // 3-pack "Family Pack", $776
+    family4:  ""   // 4-pack "Family 4-Pack", $999
   };
 
   document.querySelectorAll("[data-checkout]").forEach((el) => {
