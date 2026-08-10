@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BotWatch — Disclaimer & Terms of Service</title>
+<link rel="canonical" href="https://getbotwatch.com/disclaimer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E141F; --panel:#161D2C; --panel-alt:#1C2438; --border:#2A3348;
+    --text:#E7EBF3; --text-muted:#8D96AC; --text-faint:#5C6580;
+    --amber:#E8A33D; --teal:#47C2A0; --red:#E2604F;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --maxw:820px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--amber);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--amber);color:#141922;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(14,20,31,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+  .nav{max-width:1120px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);}
+  .v-badge{
+    font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--text-faint);
+    border:1px solid var(--border);border-radius:4px;padding:2px 6px;margin-left:2px;
+  }
+  .brand-mark{width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--amber),var(--red));position:relative;flex-shrink:0;}
+  .brand-mark::after{content:"";position:absolute;inset:5px;border-radius:2px;background:var(--bg);}
+  .back-link{font-family:var(--font-mono);font-size:13px;color:var(--text-muted);}
+  .back-link:hover{color:var(--text);}
+
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--border);}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:12px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:block;
+  }
+  h1{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);font-weight:600;margin-bottom:14px;letter-spacing:-0.01em;}
+  .updated{color:var(--text-faint);font-size:13.5px;font-family:var(--font-mono);}
+
+  .summary-box{
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:24px 26px;margin:40px 0 8px;
+  }
+  .summary-box .label{font-family:var(--font-mono);font-size:11.5px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .summary-box p{color:var(--text-muted);font-size:15px;}
+
+  main{padding:56px 0 100px;}
+  section.doc-section{margin-bottom:44px;}
+  h2{font-family:var(--font-display);font-size:21px;font-weight:600;margin-bottom:16px;padding-top:8px;}
+  h2 .num{color:var(--amber);font-family:var(--font-mono);font-size:15px;margin-right:10px;}
+  p{color:var(--text-muted);font-size:15px;margin-bottom:14px;}
+  strong{color:var(--text);}
+
+  .callout{
+    background:var(--panel-alt);border:1px solid var(--border);border-left:3px solid var(--amber);
+    border-radius:8px;padding:18px 20px;margin:16px 0;
+  }
+  .callout p{color:var(--text);font-size:14.5px;margin-bottom:0;}
+  .callout p + p{margin-top:12px;}
+
+  .callout.red{border-left-color:var(--red);}
+  .callout.teal{border-left-color:var(--teal);}
+
+  ul.plain{list-style:none;margin:12px 0;}
+  ul.plain li{
+    color:var(--text-muted);font-size:14.5px;padding:10px 0;border-top:1px solid var(--border);display:flex;gap:10px;
+  }
+  ul.plain li:first-child{border-top:none;}
+  ul.plain li .mk{color:var(--amber);font-family:var(--font-mono);flex-shrink:0;}
+
+  table.terms{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;}
+  table.terms th{
+    text-align:left;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-faint);padding:0 12px 10px 0;border-bottom:1px solid var(--border);font-weight:500;
+  }
+  table.terms td{padding:12px 12px 12px 0;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top;}
+
+  .toc{
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:48px;
+  }
+  .toc .label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  .toc ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;counter-reset:toc;}
+  @media (max-width:600px){.toc ol{grid-template-columns:1fr;}}
+  .toc li{counter-increment:toc;font-size:14px;}
+  .toc li a{color:var(--text-muted);}
+  .toc li a:hover{color:var(--amber);}
+  .toc li::before{content:counter(toc, decimal-leading-zero) "  ";font-family:var(--font-mono);color:var(--amber);font-size:12.5px;}
+
+  .lawyer-note{
+    margin-top:60px;padding:22px 24px;border:1px dashed var(--border);border-radius:10px;
+    font-size:13.5px;color:var(--text-faint);
+  }
+  .lawyer-note strong{color:var(--text-muted);}
+
+  footer{border-top:1px solid var(--border);padding:36px 0;}
+  .footer-links{display:flex;gap:20px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;margin-bottom:16px;}
+  .footer-links a{color:var(--text-muted);}
+  .footer-links a:hover{color:var(--amber);}
+  .footer-bottom{font-size:12px;color:var(--text-faint);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="brand"><span class="brand-mark"></span>BotWatch<span class="v-badge">v1</span></a>
+    <a href="index.html" class="back-link">← Back to home</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Legal</span>
+    <h1>Disclaimer &amp; Terms of Service</h1>
+    <div class="updated">Last updated: [Month] [Year] &nbsp;·&nbsp; Draft for attorney review — not yet legally finalized</div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <div class="summary-box">
+      <div class="label">In plain language</div>
+      <p>BotWatch is a research and dashboard tool built for traders who run their own strategies and bots. It is not financial advice, not a signal service, and not a guarantee of profit. It's one tool among many you should be using, and it's designed to be customized — most buyers make small code tweaks (with help from AI tools like Claude or ChatGPT, or on their own) to fit their own strategy and risk tolerance.</p>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-faint);">Throughout this document, "BotWatch," "we," "us," and "our" refer to BotWatch, LLC, the company operating this software and website.</p>
+    </div>
+
+    <div class="toc">
+      <div class="label">On this page</div>
+      <ol>
+        <li><a href="#not-advice">Not financial advice</a></li>
+        <li><a href="#no-guarantee">No guarantee of performance</a></li>
+        <li><a href="#your-decisions">You are responsible for your own decisions</a></li>
+        <li><a href="#customization">Customization is your responsibility</a></li>
+        <li><a href="#no-managed">No managed accounts</a></li>
+        <li><a href="#international">International use &amp; jurisdiction</a></li>
+        <li><a href="#license">License terms</a></li>
+        <li><a href="#custom-services">Custom services disclaimer</a></li>
+        <li><a href="#affiliate">Affiliate disclosure</a></li>
+        <li><a href="#liability">Limitation of liability</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="privacy.html">Privacy policy →</a></li>
+      </ol>
+    </div>
+
+    <section class="doc-section" id="not-advice">
+      <h2><span class="num">01</span>Not Financial Advice</h2>
+      <div class="callout red">
+        <p>BotWatch is a software tool for research, analysis, and trading automation. It does not provide investment advice, and nothing on this site or within the software constitutes a recommendation to buy, sell, or hold any security. All trading decisions are made solely by you, the user.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="no-guarantee">
+      <h2><span class="num">02</span>No Guarantee of Performance</h2>
+      <p>Trading involves substantial risk of loss and is not suitable for every investor. Past performance — whether of the software, any strategy, or any backtest — is not indicative of future results. We make no representation or warranty, express or implied, that use of this software will result in profit or avoid loss.</p>
+    </section>
+
+    <section class="doc-section" id="your-decisions">
+      <h2><span class="num">03</span>You Are Responsible for Your Own Decisions</h2>
+      <p>BotWatch is a tool to support your own research and strategy development, not a substitute for your own judgment, due diligence, or risk management. You are solely responsible for any trades, bots, or strategies you configure, run, or deploy using this software.</p>
+    </section>
+
+    <section class="doc-section" id="customization">
+      <h2><span class="num">04</span>Customization Is Your Responsibility</h2>
+      <p>This platform is designed to be customized to your own strategy through code-level configuration. We are not responsible for the outcome of any modifications you make, including changes made with the assistance of third-party AI tools.</p>
+      <div class="callout teal">
+        <p><strong>Before trading live:</strong> test any changes in a paper-trading / sandbox environment before deploying them with real capital. This is your responsibility regardless of who implemented the change.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="no-managed">
+      <h2><span class="num">05</span>No Managed Accounts</h2>
+      <p>We do not manage funds, execute trades on your behalf, or have access to your brokerage credentials beyond what is required for the software to function as configured by you.</p>
+    </section>
+
+    <section class="doc-section" id="international">
+      <h2><span class="num">06</span>International Use &amp; Jurisdiction</h2>
+      <p>BotWatch is available for purchase globally through our payment processor, which handles applicable VAT, GST, and sales tax collection at checkout. However, financial and trading regulations vary significantly by country.</p>
+      <div class="callout teal">
+        <p>It is your responsibility to ensure that your use of BotWatch, and any trading activity you conduct, complies with the laws and regulations of your own country or jurisdiction. We make no representation that BotWatch or its use is appropriate or permitted in every jurisdiction.</p>
+      </div>
+      <p style="font-size:13px;color:var(--text-faint);">In compliance with U.S. export control regulations, BotWatch is not available for purchase by individuals or entities located in, or ordinarily resident in, countries subject to U.S. trade sanctions or embargoes.</p>
+    </section>
+
+    <section class="doc-section" id="license">
+      <h2><span class="num">07</span>License Terms</h2>
+      <ul class="plain">
+        <li><span class="mk">→</span>Your purchase grants a personal, non-transferable license to use the software across the bots and accounts you personally control.</li>
+        <li><span class="mk">→</span>Update windows and source-code access vary by tier — see your purchase confirmation for what's included.</li>
+        <li><span class="mk">→</span>Support scope is limited to installation and documentation questions; custom code changes are a separate paid service (see below).</li>
+      </ul>
+      <table class="terms">
+        <thead><tr><th>Tier</th><th>Updates included</th><th>Source access</th></tr></thead>
+        <tbody>
+          <tr><td>Core</td><td>6 months</td><td>No</td></tr>
+          <tr><td>Bot Trader</td><td>12 months</td><td>No</td></tr>
+          <tr><td>Full Access</td><td>12 months + early access</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;color:var(--text-faint);">Refund policy: [define before launch — e.g. no refunds once a license key has been delivered, or a short trial-based window].</p>
+    </section>
+
+    <section class="doc-section" id="custom-services">
+      <h2><span class="num">08</span>Custom Services Disclaimer</h2>
+      <p>This disclaimer applies to <strong>all services</strong>, not just the software license — including setup assistance, custom code changes, and bot/strategy integrations performed by us.</p>
+      <div class="callout red">
+        <p>Any custom development or configuration work is provided as software development work only. It does not constitute financial advice, a recommendation of any strategy, or any assurance of trading performance or outcome. We are not responsible for trading losses resulting from the use of any custom configuration, whether implemented by you, by us, or with the assistance of any third-party AI tool.</p>
+      </div>
+      <p><strong>Scope limitation:</strong> custom services are limited to the dashboard, research, and monitoring layer of the software. We do not provide investment advisory services, do not manage funds, and does not make trading decisions on behalf of any customer.</p>
+    </section>
+
+    <section class="doc-section" id="affiliate">
+      <h2><span class="num">09</span>Affiliate Disclosure</h2>
+      <div class="callout teal">
+        <p>Some links on this site are affiliate/referral links (e.g., to TradingView or Alpaca). If you sign up through these links, we may earn a commission at no additional cost to you. We only link to tools we actually use or believe are relevant to traders using this platform.</p>
+      </div>
+    </section>
+
+    <section class="doc-section" id="liability">
+      <h2><span class="num">10</span>Limitation of Liability</h2>
+      <p>The software is provided "as is," without warranty of any kind, express or implied, including but not limited to fitness for a particular trading strategy or outcome. To the maximum extent permitted by law, Our total liability for any claim arising from use of the software or services is limited to the amount you paid. We are not liable for any trading losses, lost profits, or indirect or consequential damages arising from use of the software, whether or not customized, and whether the customization was performed by you, by us, or with the assistance of any AI tool.</p>
+      <p style="font-size:13px;color:var(--text-faint);">Governing law and dispute resolution: [to be finalized with attorney review — typically your state's law, with an optional arbitration clause].</p>
+    </section>
+
+    <section class="doc-section" id="contact">
+      <h2><span class="num">11</span>Contact</h2>
+      <p>Questions about these terms or the disclaimer can be sent to <a href="mailto:hello@getbotwatch.com">hello@getbotwatch.com</a>.</p>
+    </section>
+
+    <div class="lawyer-note">
+      <strong>Note for the site owner:</strong> this page is a starting draft, not a finished legal document. Have a securities/tech attorney review it before publishing — particularly the "not investment advice" framing, and whether any specific feature of the platform (e.g., pre-built strategy templates, alerts, or performance-adjacent language) could be interpreted as crossing into investment advice territory. Replace all bracketed placeholders before launch.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#services">Custom Work</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="footer-bottom">© 2026 BotWatch, LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

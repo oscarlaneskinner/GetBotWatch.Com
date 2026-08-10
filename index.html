@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BotWatch v1 — Know what your bot is actually doing</title>
+<link rel="canonical" href="https://getbotwatch.com/">
+<meta name="description" content="A research and monitoring dashboard for traders running automated strategies. One-time license. Not financial advice.">
+<meta property="og:title" content="BotWatch — Know what your bot is actually doing">
+<meta property="og:description" content="A research and monitoring dashboard for traders running automated strategies. One-time license. Not financial advice.">
+<meta property="og:url" content="https://getbotwatch.com/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E141F;
+    --panel:#161D2C;
+    --panel-alt:#1C2438;
+    --border:#2A3348;
+    --text:#E7EBF3;
+    --text-muted:#8D96AC;
+    --text-faint:#5C6580;
+    --amber:#E8A33D;
+    --amber-dim:#8A6526;
+    --teal:#47C2A0;
+    --red:#E2604F;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+    --radius:10px;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:var(--font-mono);}
+  ::selection{background:var(--amber);color:#141922;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,20,31,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    max-width:var(--maxw);margin:0 auto;padding:0 28px;
+    height:64px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-0.01em;}
+  .v-badge{
+    font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--text-faint);
+    border:1px solid var(--border);border-radius:4px;padding:2px 6px;margin-left:2px;
+  }
+  .brand-mark{
+    width:22px;height:22px;border-radius:5px;
+    background:linear-gradient(135deg,var(--amber),var(--red));
+    position:relative;flex-shrink:0;
+  }
+  .brand-mark::after{
+    content:"";position:absolute;inset:5px;border-radius:2px;background:var(--bg);
+  }
+  .navlinks{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
+  .navlinks a:hover{color:var(--text);}
+  .nav-cta{
+    font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;
+    background:var(--amber);color:#181205;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{background:#f0af52;transform:translateY(-1px);}
+  @media (max-width:760px){.navlinks{display:none;}}
+
+  /* ---------- Signal ticker (signature element) ---------- */
+  .ticker-wrap{
+    background:#0A0F18;border-bottom:1px solid var(--border);
+    overflow:hidden;position:relative;height:34px;display:flex;align-items:center;
+  }
+  .ticker-wrap::before,.ticker-wrap::after{
+    content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
+  }
+  .ticker-wrap::before{left:0;background:linear-gradient(90deg,#0A0F18, transparent);}
+  .ticker-wrap::after{right:0;background:linear-gradient(270deg,#0A0F18, transparent);}
+  .ticker-track{
+    display:flex;gap:48px;white-space:nowrap;
+    font-family:var(--font-mono);font-size:12px;color:var(--text-faint);
+    animation:ticker 32s linear infinite;
+    padding-left:100%;
+  }
+  .ticker-track span{display:flex;align-items:center;gap:8px;}
+  .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+  .dot.ok{background:var(--teal);}
+  .dot.warn{background:var(--amber);}
+  .dot.alert{background:var(--red);}
+  @keyframes ticker{
+    from{transform:translateX(0);}
+    to{transform:translateX(-100%);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ticker-track{animation:none;padding-left:24px;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:88px 0 72px;position:relative;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  @media (max-width:920px){.hero-grid{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);font-size:12px;color:var(--amber);
+    background:rgba(232,163,61,0.08);border:1px solid rgba(232,163,61,0.25);
+    padding:6px 12px;border-radius:20px;margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(34px,4.6vw,54px);line-height:1.08;margin-bottom:22px;
+  }
+  .hero h1 .accent{color:var(--amber);}
+  .hero p.sub{
+    font-size:17px;color:var(--text-muted);max-width:520px;margin-bottom:32px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+  .btn-primary{
+    background:var(--amber);color:#181205;font-weight:600;font-size:15px;
+    padding:14px 26px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary:hover{background:#f0af52;transform:translateY(-1px);}
+  .btn-secondary{
+    border:1px solid var(--border);color:var(--text);font-size:15px;font-weight:500;
+    padding:14px 24px;border-radius:8px;transition:border-color .15s ease, background .15s ease;
+  }
+  .btn-secondary:hover{border-color:var(--text-faint);background:var(--panel);}
+  .hero-note{font-size:13px;color:var(--text-faint);}
+
+  /* Dashboard mock */
+  .dash{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px;box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .dash-title{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;}
+  .dash-live{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--teal);}
+  .pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  @media (prefers-reduced-motion:reduce){.pulse{animation:none;}}
+  .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+  .card{
+    background:var(--panel-alt);border:1px solid var(--border);border-radius:10px;padding:14px;
+  }
+  .card-label{font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-bottom:6px;}
+  .card-value{font-family:var(--font-display);font-size:22px;font-weight:600;}
+  .card-value.amber{color:var(--amber);}
+  .card-value.teal{color:var(--teal);}
+  .card-sub{font-size:11px;color:var(--text-faint);margin-top:2px;}
+  .alert-row{
+    background:rgba(232,163,61,0.08);border:1px solid rgba(232,163,61,0.3);
+    border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;
+    font-size:12.5px;color:#F0C480;
+  }
+  .alert-row .dot.warn{flex-shrink:0;}
+
+  /* ---------- Section headers ---------- */
+  .section-head{max-width:620px;margin-bottom:48px;}
+  .section-eyebrow{
+    font-family:var(--font-mono);font-size:12px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:block;
+  }
+  .section-head h2{font-size:clamp(26px,3vw,34px);margin-bottom:14px;line-height:1.2;}
+  .section-head p{color:var(--text-muted);font-size:16px;}
+
+  /* ---------- Why bot traders section ---------- */
+  .why{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:860px){.why-grid{grid-template-columns:1fr;}}
+  .why-card{
+    background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:24px;
+  }
+  .why-card .fail{
+    font-family:var(--font-mono);font-size:12px;color:var(--red);margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .why-card h3{font-size:17px;margin-bottom:10px;font-weight:600;}
+  .why-card p{color:var(--text-muted);font-size:14px;}
+
+  /* ---------- Customize section ---------- */
+  .customize-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media (max-width:900px){.customize-grid{grid-template-columns:1fr;}}
+  .code-block{
+    background:#0A0F18;border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  }
+  .code-head{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);
+  }
+  .code-head .dotx{width:10px;height:10px;border-radius:50%;}
+  .code-head .dotx.r{background:#E2604F;}
+  .code-head .dotx.y{background:#E8A33D;}
+  .code-head .dotx.g{background:#47C2A0;}
+  .code-head span.fname{margin-left:8px;font-family:var(--font-mono);font-size:12px;color:var(--text-faint);}
+  .code-body{padding:18px 20px;font-family:var(--font-mono);font-size:12.5px;line-height:1.75;overflow-x:auto;}
+  .code-body .c1{color:var(--text-faint);}
+  .code-body .c2{color:var(--teal);}
+  .code-body .c3{color:var(--amber);}
+  .code-body .c4{color:var(--text);}
+  .feature-list{list-style:none;margin-top:24px;}
+  .feature-list li{
+    display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--border);font-size:14.5px;color:var(--text-muted);
+  }
+  .feature-list li:first-child{border-top:none;}
+  .feature-list li .chk{color:var(--teal);flex-shrink:0;font-family:var(--font-mono);}
+
+  /* ---------- What it is/isn't ---------- */
+  .isnt{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .isnt-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:760px){.isnt-grid{grid-template-columns:1fr;}}
+  .isnt-col{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:26px;}
+  .isnt-col h3{font-size:15px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .isnt-col.yes h3{color:var(--teal);}
+  .isnt-col.no h3{color:var(--red);}
+  .isnt-col ul{list-style:none;}
+  .isnt-col li{font-size:14.5px;color:var(--text-muted);padding:8px 0;display:flex;gap:10px;}
+  .isnt-note{
+    margin-top:28px;font-size:14px;color:var(--text-faint);font-style:italic;max-width:640px;
+  }
+
+  /* ---------- Tools/affiliate ---------- */
+  .tools{padding:64px 0;}
+  .tools-head{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:22px;}
+  .tools-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .tool-chip{
+    border:1px solid var(--border);border-radius:9px;padding:14px 20px;
+    display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:15px;
+    transition:border-color .15s ease;
+  }
+  .tool-chip:hover{border-color:var(--amber);}
+  .tool-chip .arrow{color:var(--text-faint);font-family:var(--font-mono);font-size:13px;}
+  .tools-disclosure{font-size:12.5px;color:var(--text-faint);margin-top:18px;max-width:600px;}
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:900px){.pricing-grid{grid-template-columns:1fr;}}
+  .price-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:30px 26px;
+    display:flex;flex-direction:column;
+  }
+  .price-card.featured{
+    border-color:var(--amber);position:relative;
+    background:linear-gradient(180deg, rgba(232,163,61,0.06), var(--panel) 40%);
+  }
+  .badge{
+    position:absolute;top:-12px;left:26px;background:var(--amber);color:#181205;
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;
+    font-family:var(--font-mono);letter-spacing:.02em;
+  }
+  .price-tier{font-family:var(--font-mono);font-size:13px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .price-amount{font-family:var(--font-display);font-size:38px;font-weight:700;margin-bottom:4px;}
+  .price-amount span{font-size:15px;color:var(--text-faint);font-weight:400;}
+  .price-desc{font-size:13.5px;color:var(--text-muted);margin-bottom:22px;}
+  .price-list{list-style:none;margin-bottom:26px;flex-grow:1;}
+  .price-list li{
+    font-size:14px;color:var(--text-muted);padding:8px 0;border-top:1px solid var(--border);
+    display:flex;gap:10px;
+  }
+  .price-list li:first-child{border-top:none;}
+  .price-list .chk{color:var(--teal);font-family:var(--font-mono);flex-shrink:0;}
+  .price-btn{
+    text-align:center;padding:12px;border-radius:8px;font-weight:600;font-size:14px;
+    border:1px solid var(--border);transition:all .15s ease;
+  }
+  .price-card.featured .price-btn{background:var(--amber);color:#181205;border-color:var(--amber);}
+  .price-btn:hover{border-color:var(--amber);}
+  .price-card.featured .price-btn:hover{background:#f0af52;}
+  .license-note{text-align:center;color:var(--text-faint);font-size:13px;margin-top:28px;}
+
+  /* ---------- Custom services ---------- */
+  .services{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  table.svc{width:100%;border-collapse:collapse;font-size:14.5px;}
+  table.svc th{
+    text-align:left;font-family:var(--font-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-faint);padding:0 0 14px;border-bottom:1px solid var(--border);font-weight:500;
+  }
+  table.svc td{padding:16px 0;border-bottom:1px solid var(--border);color:var(--text-muted);}
+  table.svc td:last-child{color:var(--amber);font-family:var(--font-mono);text-align:right;white-space:nowrap;}
+  table.svc th:last-child{text-align:right;}
+  .services-note{
+    margin-top:24px;font-size:13.5px;color:var(--text-faint);max-width:680px;line-height:1.7;
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{text-align:center;padding:100px 0;}
+  .final-cta h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:18px;max-width:640px;margin-left:auto;margin-right:auto;}
+  .final-cta p{color:var(--text-muted);max-width:520px;margin:0 auto 34px;font-size:16px;}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--border);padding:40px 0;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .footer-disclaimer{font-size:12.5px;color:var(--text-faint);max-width:640px;line-height:1.7;}
+  .footer-links{display:flex;gap:20px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;}
+  .footer-bottom{margin-top:28px;font-size:12px;color:var(--text-faint);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="brand-mark"></span>BotWatch<span class="v-badge">v1</span></div>
+    <nav class="navlinks">
+      <a href="#why">Why It Matters</a>
+      <a href="#customize">Customization</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#services">Custom Work</a>
+    </nav>
+    <a href="#pricing" class="nav-cta" data-checkout="botTrader">Get Access</a>
+  </div>
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span><span class="dot ok"></span>14:32:01 — AAPL position opened, 40 shares</span>
+      <span><span class="dot warn"></span>14:32:14 — Drawdown approaching 6% threshold</span>
+      <span><span class="dot ok"></span>14:33:02 — Bot heartbeat received, latency 84ms</span>
+      <span><span class="dot alert"></span>14:33:40 — Order fill delayed 11s, flagged for review</span>
+      <span><span class="dot ok"></span>14:34:05 — Strategy A within normal parameters</span>
+      <span><span class="dot warn"></span>14:35:22 — Position size 2.4x average, exposure alert</span>
+      <span><span class="dot ok"></span>14:36:01 — AAPL position opened, 40 shares</span>
+      <span><span class="dot warn"></span>14:36:14 — Drawdown approaching 6% threshold</span>
+      <span><span class="dot ok"></span>14:37:02 — Bot heartbeat received, latency 84ms</span>
+      <span><span class="dot alert"></span>14:37:40 — Order fill delayed 11s, flagged for review</span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot warn"></span>Built for traders running automated strategies</div>
+      <h1>Know what your bot is <span class="accent">actually doing</span> — before it costs you.</h1>
+      <p class="sub">BotWatch is a research and monitoring dashboard that sits alongside your trading bots. One tool in your stack, not a promise of profit — the visibility layer most bot traders wish they'd had after something already went wrong.</p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn-primary" data-checkout="botTrader">Get Lifetime Access →</a>
+        <a href="#customize" class="btn-secondary">See how it customizes</a>
+      </div>
+      <div class="hero-note">One-time license. No subscription. Not financial advice.</div>
+    </div>
+    <div class="dash" role="img" aria-label="Example BotWatch dashboard showing bot monitoring metrics">
+      <div class="dash-top">
+        <span class="dash-title">Live Monitor — Strategy A</span>
+        <span class="dash-live"><span class="pulse"></span>LIVE</span>
+      </div>
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-label">Drawdown</div>
+          <div class="card-value amber">-6.2%</div>
+          <div class="card-sub">Threshold: -8.0%</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Open Positions</div>
+          <div class="card-value">7</div>
+          <div class="card-sub">3 flagged for review</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Bot Uptime</div>
+          <div class="card-value teal">99.4%</div>
+          <div class="card-sub">Last 30 days</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Exposure</div>
+          <div class="card-value">2.4x</div>
+          <div class="card-sub">vs. average position</div>
+        </div>
+      </div>
+      <div class="alert-row"><span class="dot warn"></span>Position size on TSLA is 2.4x your average — review exposure before next fill.</div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Why it matters</span>
+      <h2>Automated trading moves faster than you can watch manually.</h2>
+      <p>A stuck position, a bad fill, a strategy that keeps trading through conditions it was never built for — these are the quiet failures that drain an account before anyone notices.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="fail">◆ FAILURE MODE</div>
+        <h3>The bot keeps trading through a broken signal</h3>
+        <p>Without a monitoring layer, a strategy can run for hours on bad data or a logic error before you'd ever catch it manually.</p>
+      </div>
+      <div class="why-card">
+        <div class="fail">◆ FAILURE MODE</div>
+        <h3>Exposure creeps up without you noticing</h3>
+        <p>Position sizing drifts over time as a strategy compounds gains or losses — invisible unless something is actively tracking it against your baseline.</p>
+      </div>
+      <div class="why-card">
+        <div class="fail">◆ FAILURE MODE</div>
+        <h3>An API hiccup goes unnoticed for hours</h3>
+        <p>A stuck connection or delayed fill can leave a bot silently exposed. BotWatch flags heartbeat and latency issues as they happen, not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="customize">
+  <div class="wrap customize-grid">
+    <div>
+      <span class="section-eyebrow">Built to be customized</span>
+      <h2 style="font-size:clamp(24px,3vw,32px);margin-bottom:16px;">Every strategy is different. Your dashboard should be too.</h2>
+      <p style="color:var(--text-muted);font-size:15.5px;margin-bottom:8px;">BotWatch ships with clean, readable code so you can adjust starting account size, thresholds, indicators, and integrations to match your own strategy.</p>
+      <ul class="feature-list">
+        <li><span class="chk">✓</span>Most buyers customize it themselves using Claude or ChatGPT to read and safely modify the code — no formal programming background required.</li>
+        <li><span class="chk">✓</span>Documentation and example prompts included to help you get started right away.</li>
+        <li><span class="chk">✓</span>Prefer not to touch the code? Custom changes are available as a separate paid service — see below.</li>
+      </ul>
+    </div>
+    <div class="code-block">
+      <div class="code-head">
+        <span class="dotx r"></span><span class="dotx y"></span><span class="dotx g"></span>
+        <span class="fname">config/account.py</span>
+      </div>
+      <div class="code-body"><span class="c1"># Tell BotWatch how you actually trade —</span><br>
+<span class="c1"># then ask your AI assistant to tune the rest.</span><br><br>
+<span class="c4">STARTING_ACCOUNT_SIZE</span> = <span class="c3">25_000</span><br>
+<span class="c4">MAX_DRAWDOWN_PCT</span> = <span class="c3">8.0</span><br>
+<span class="c4">MAX_POSITION_EXPOSURE</span> = <span class="c3">2.0</span><span class="c1">  # x average size</span><br>
+<span class="c4">ALERT_ON_LATENCY_MS</span> = <span class="c3">500</span><br><br>
+<span class="c1">## → "Claude, adjust MAX_DRAWDOWN_PCT to</span><br>
+<span class="c1">##    match my risk tolerance and explain</span><br>
+<span class="c1">##    what changes downstream."</span><br>
+<span class="c2">✓ config saved — dashboard updated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="isnt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Set expectations</span>
+      <h2>What BotWatch is — and isn't</h2>
+    </div>
+    <div class="isnt-grid">
+      <div class="isnt-col yes">
+        <h3>◆ It is</h3>
+        <ul>
+          <li>→ A research and monitoring dashboard for equities trading</li>
+          <li>→ Built to work alongside bots and strategies you already run</li>
+          <li>→ A one-time purchase, yours to own and customize</li>
+          <li>→ One tool among several you should be using</li>
+        </ul>
+      </div>
+      <div class="isnt-col no">
+        <h3>◆ It isn't</h3>
+        <ul>
+          <li>→ Financial advice or a signal service</li>
+          <li>→ A guarantee of profit — no honest tool can promise that</li>
+          <li>→ A replacement for your own risk management and judgment</li>
+          <li>→ A managed account or trade-execution service</li>
+        </ul>
+      </div>
+    </div>
+    <p class="isnt-note">We'd rather you trust us because we were straight with you than because we oversold it.</p>
+  </div>
+</section>
+
+<section class="tools">
+  <div class="wrap">
+    <div class="tools-head">Tools we use and recommend alongside BotWatch</div>
+    <div class="tools-row">
+      <a href="#" class="tool-chip" data-affiliate="tradingview">TradingView <span class="arrow">↗</span></a>
+      <a href="#" class="tool-chip" data-affiliate="alpaca">Alpaca <span class="arrow">↗</span></a>
+    </div>
+    <p class="tools-disclosure">Some links above are affiliate/referral links. If you sign up through them, we may earn a commission at no additional cost to you — we only link to tools we actually use.</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Pricing</span>
+      <h2>One-time license. No subscription.</h2>
+      <p>Pick the tier that matches how you trade — the Bot Trader tier is built specifically around the risk-monitoring problem this page opened with.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Core</div>
+        <div class="price-amount">$297</div>
+        <div class="price-desc">For general research and analysis use.</div>
+        <ul class="price-list">
+          <li><span class="chk">✓</span>Full dashboard + research platform</li>
+          <li><span class="chk">✓</span>Standard indicators and views</li>
+          <li><span class="chk">✓</span>Documentation + setup guide</li>
+          <li><span class="chk">✓</span>6 months of updates</li>
+        </ul>
+        <a href="#" class="price-btn" data-checkout="core">Get Core</a>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">MOST POPULAR</span>
+        <div class="price-tier">Bot Trader</div>
+        <div class="price-amount">$597</div>
+        <div class="price-desc">Built for anyone running automated strategies.</div>
+        <ul class="price-list">
+          <li><span class="chk">✓</span>Everything in Core</li>
+          <li><span class="chk">✓</span>Bot monitoring & risk views</li>
+          <li><span class="chk">✓</span>Drawdown + exposure alerts</li>
+          <li><span class="chk">✓</span>Heartbeat / latency anomaly detection</li>
+          <li><span class="chk">✓</span>12 months of updates</li>
+        </ul>
+        <a href="#" class="price-btn" data-checkout="botTrader">Get Bot Trader</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Full Access</div>
+        <div class="price-amount">$997</div>
+        <div class="price-desc">For power users building heavily on top of it.</div>
+        <ul class="price-list">
+          <li><span class="chk">✓</span>Everything in Bot Trader</li>
+          <li><span class="chk">✓</span>Full source access</li>
+          <li><span class="chk">✓</span>Priority support window</li>
+          <li><span class="chk">✓</span>Early access to updates</li>
+        </ul>
+        <a href="#" class="price-btn" data-checkout="fullAccess">Get Full Access</a>
+      </div>
+    </div>
+    <p class="license-note">Licensed for personal use across the bots/accounts you control. Not financial advice — trading involves risk of loss.</p>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Prefer it done for you?</span>
+      <h2>Custom work, priced upfront</h2>
+      <p>Self-customization is included with every license. If you'd rather not touch the code, these are scoped and quoted before any charge.</p>
+    </div>
+    <table class="svc">
+      <thead>
+        <tr><th>Service</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Setup / installation help</td><td>$99 flat</td></tr>
+        <tr><td>Minor custom change (e.g. account size logic, a threshold)</td><td>$150 flat</td></tr>
+        <tr><td>Add a new bot / strategy integration</td><td>$500 flat</td></tr>
+        <tr><td>Custom development (anything outside the above)</td><td>$125/hr, 2-hr min</td></tr>
+        <tr><td>Ongoing "done for you" support</td><td>$500/mo retainer</td></tr>
+      </tbody>
+    </table>
+    <p class="services-note">All custom work is limited to the dashboard, research, and monitoring layer, and is provided as software development only — not financial advice, and not a guarantee of trading outcomes. Every engagement includes the same disclaimer as the platform itself.</p>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>If you're running a bot, you already know how fast things can go wrong.</h2>
+    <p>BotWatch won't trade for you and won't promise you a return. It'll show you what's actually happening — so you can catch it before it costs you.</p>
+    <a href="#pricing" class="btn-primary" data-checkout="botTrader">Get Lifetime Access →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-disclaimer">
+        <strong style="color:var(--text-muted);">Not financial advice.</strong> BotWatch is a software tool for research, analysis, and monitoring. It does not provide investment advice and makes no guarantee of trading performance. Trading involves substantial risk of loss. Past performance is not indicative of future results. You are solely responsible for your own trading decisions.
+      </div>
+      <div class="footer-links">
+        <a href="#why">Why It Matters</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#services">Custom Work</a>
+        <a href="disclaimer.html">Full Disclaimer</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 BotWatch, LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+
+<script>
+  /* =========================================================
+     CHECKOUT LINKS — edit this block, nothing else.
+     -----------------------------------------------------------
+     Paste your real Gumroad or Lemon Squeezy product/checkout
+     URLs below for each tier. Every "Get [Tier]" button on this
+     page pulls its link from here automatically.
+
+     Gumroad example:      https://gumroad.com/l/your-product-slug
+     Lemon Squeezy example: https://your-store.lemonsqueezy.com/checkout/buy/xxxxxxx
+
+     Until you fill these in, buttons will alert a reminder
+     instead of navigating anywhere, so nothing links to a dead
+     "#" silently once you go live.
+     ========================================================= */
+  const CHECKOUT_LINKS = {
+    core:      "",   // e.g. "https://gumroad.com/l/botwatch-core"
+    botTrader: "",   // e.g. "https://gumroad.com/l/botwatch-bot-trader"
+    fullAccess:""    // e.g. "https://gumroad.com/l/botwatch-full-access"
+  };
+
+  document.querySelectorAll("[data-checkout]").forEach((el) => {
+    const key = el.getAttribute("data-checkout");
+    const url = CHECKOUT_LINKS[key];
+    if (url) {
+      el.setAttribute("href", url);
+    } else {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert(
+          "Checkout link not set yet for '" + key + "'.\n\n" +
+          "Open index.html, find the CHECKOUT_LINKS block near the " +
+          "bottom, and paste in your Gumroad or Lemon Squeezy link " +
+          "for this tier."
+        );
+      });
+    }
+  });
+
+  /* =========================================================
+     AFFILIATE LINKS — same pattern as above, separate block
+     so you can update these independently (they'll likely be
+     approved/added on a different timeline than your checkout
+     links).
+     -----------------------------------------------------------
+     Paste your approved affiliate/referral URLs below. Get
+     these from:
+       - TradingView: tradingview.com/partner-program (apply,
+         then find your link in the partner dashboard)
+       - Alpaca: contact support@alpaca.markets to request
+         referral program access (limited availability)
+     ========================================================= */
+  const AFFILIATE_LINKS = {
+    tradingview: "",  // e.g. "https://www.tradingview.com/?aff_id=XXXXX"
+    alpaca:      ""   // e.g. "https://alpaca.markets/?ref=XXXXX"
+  };
+
+  document.querySelectorAll("[data-affiliate]").forEach((el) => {
+    const key = el.getAttribute("data-affiliate");
+    const url = AFFILIATE_LINKS[key];
+    if (url) {
+      el.setAttribute("href", url);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener sponsored");
+    } else {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert(
+          "Affiliate link not set yet for '" + key + "'.\n\n" +
+          "Open index.html, find the AFFILIATE_LINKS block near the " +
+          "bottom, and paste in your approved referral link."
+        );
+      });
+    }
+  });
+</script>
+</body>
+</html>
