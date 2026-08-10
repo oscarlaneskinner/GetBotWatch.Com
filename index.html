@@ -95,6 +95,11 @@
     display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
   }
   @media (max-width:920px){.hero-grid{grid-template-columns:1fr;}}
+  .mission-statement{
+    font-size:1.02rem;font-weight:600;color:var(--text-muted);
+    line-height:1.5;margin-bottom:20px;max-width:540px;
+  }
+  .mission-statement .hl{color:var(--amber);font-weight:700;}
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--font-mono);font-size:12px;color:var(--amber);
@@ -313,14 +318,15 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
+      <p class="mission-statement">We believe AI and algorithmic bots aren't just a trend — they're becoming a standard part of how serious traders operate. <span class="hl">BotWatch is how you stay in control of that shift, instead of flying blind through it.</span></p>
       <div class="eyebrow"><span class="dot warn"></span>Built for traders running automated strategies</div>
-      <h1>Know what your bot is <span class="accent">actually doing</span> — before it costs you.</h1>
-      <p class="sub">BotWatch is a research and monitoring dashboard that sits alongside your trading bots. One tool in your stack, not a promise of profit — the visibility layer most bot traders wish they'd had after something already went wrong.</p>
+      <h1>Know what your bot is <span class="accent">actually doing</span> — before it costs you!</h1>
+      <p class="sub">BotWatch is a research and monitoring dashboard that sits alongside your trading bots. One tool in your stack, not a promise of profit — the visibility layer most bot traders wish they'd had, before something went wrong.</p>
       <div class="hero-ctas">
         <a href="#pricing" class="btn-primary" data-checkout="platform">Get Lifetime Access →</a>
-        <a href="#customize" class="btn-secondary">See how it customizes</a>
+        <a href="#customize" class="btn-secondary">See how it customizes →</a>
       </div>
-      <div class="hero-note">One-time license. No subscription. Not financial advice.</div>
+      <div class="hero-note">One-time license. No subscription. Yours forever. Not financial advice.</div>
     </div>
     <div class="dash" role="img" aria-label="Example BotWatch dashboard showing bot monitoring metrics">
       <div class="dash-top">
@@ -358,7 +364,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Why it matters</span>
-      <h2>Automated trading moves faster than you can watch manually.</h2>
+      <h2>Automated trading moves faster than you can watch manually — that's exactly the problem.</h2>
       <p>A stuck position, a bad fill, a strategy that keeps trading through conditions it was never built for — these are the quiet failures that drain an account before anyone notices.</p>
     </div>
     <div class="why-grid">
@@ -484,7 +490,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">What's included</span>
-      <h2>The platform, plus a bot ready to run.</h2>
+      <h2>The platform, plus a bot ready to run — right out of the box.</h2>
       <p>Every license includes the full research and monitoring dashboard — and a pre-built strategy bot so you have something real to test, learn from, and customize from day one.</p>
     </div>
     <div style="max-width:420px;margin:0 auto;">
@@ -502,7 +508,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Pricing</span>
-      <h2>One-time license. No subscription.</h2>
+      <h2>One-time license. No subscription. Ever.</h2>
       <p>The platform and the GLD Trend Bot, in a single bundle — built specifically around the risk-monitoring problem this page opened with.</p>
     </div>
     <div style="max-width:520px;margin:0 auto;">
@@ -531,7 +537,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Buying for family or friends?</span>
-      <h2>Give the gift of learning to invest.</h2>
+      <h2>Give the gift of smarter trading.</h2>
       <p>Every additional license gets a little cheaper — each one is a separate, full license with its own key, ready to give.</p>
     </div>
     <table class="svc" style="max-width:720px;margin:0 auto;">
@@ -572,8 +578,8 @@
 <section id="v2-offer" style="padding-top:0;">
   <div class="wrap">
     <div style="max-width:720px;margin:0 auto;background:linear-gradient(135deg, rgba(47,138,245,0.10), var(--panel) 55%);border:1px solid var(--amber);border-radius:14px;padding:32px 34px;">
-      <div style="font-family:var(--font-mono);font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Early Adopter Offer — ends Dec 31, 2026</div>
-      <h3 style="font-family:var(--font-display);font-size:24px;margin-bottom:12px;">Lock in $99 pricing on BotWatch V2.</h3>
+      <div style="font-family:var(--font-mono);font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">⏳ Early Adopter Offer — ends Dec 31, 2026</div>
+      <h3 style="font-family:var(--font-display);font-size:24px;margin-bottom:12px;">Lock in $99 pricing on BotWatch V2 — before it's gone!</h3>
       <p style="color:var(--text-muted);font-size:15px;margin-bottom:16px;">Buy any BotWatch license by December 31, 2026 and you'll be able to upgrade to V2 — real-time news integration, additional indicators, and expanded AI strategy learning — for just <strong style="color:var(--text);">$99</strong> when it releases, instead of the <strong style="color:var(--text);">$999</strong> full price new customers will pay. Every license in a multi-pack qualifies, so gift recipients lock in the same offer.</p>
       <p style="font-size:12.5px;color:var(--text-faint);">No release date is being promised — this locks in your upgrade price, whenever V2 ships. Buy after Dec 31, 2026 and V2 will be available at full price when it's released.</p>
     </div>
@@ -585,25 +591,52 @@
     <div class="section-head">
       <span class="section-eyebrow">Prefer it done for you?</span>
       <h2>Custom work, billed hourly</h2>
-      <p>Self-customization is included with your license. If you'd rather not touch the code yourself, custom changes are available separately — scoped and quoted before any charge.</p>
+      <p>Self-customization is included with your license. Prefer not to touch the code yourself? Buy a block of hours below, then tell us what you need — reuse the same links any time you need more.</p>
     </div>
     <table class="svc">
       <thead>
-        <tr><th>Service</th><th>Price</th></tr>
+        <tr><th>Hours</th><th>Price</th><th></th></tr>
       </thead>
       <tbody>
-        <tr><td>Custom code changes / edits (setup help, tweaks, new bot logic, anything else)</td><td>$135/hr, 2-hr minimum</td></tr>
+        <tr>
+          <td>1 Hour</td>
+          <td style="color:var(--amber);font-family:var(--font-mono);text-align:left;">$135</td>
+          <td style="text-align:right;"><a href="#" data-checkout="hours1" style="color:var(--amber);font-size:13px;font-weight:600;">Buy 1 Hour →</a></td>
+        </tr>
+        <tr>
+          <td>5 Hours</td>
+          <td style="color:var(--amber);font-family:var(--font-mono);text-align:left;">$675</td>
+          <td style="text-align:right;"><a href="#" data-checkout="hours5" style="color:var(--amber);font-size:13px;font-weight:600;">Buy 5 Hours →</a></td>
+        </tr>
       </tbody>
     </table>
     <p class="services-note">All custom work is limited to the dashboard, research, and monitoring layer, and is provided as software development only — not financial advice, and not a guarantee of trading outcomes. Every engagement includes the same disclaimer as the platform itself.</p>
+
+    <div style="max-width:640px;margin:36px auto 0;">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:10px;">Already purchased? Tell us what you need</h3>
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px;">Describe what you'd like changed or built — the more detail, the better we can scope it. This goes to our project queue, not a personal inbox.</p>
+      <form name="custom-work-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="hidden" name="form-name" value="custom-work-request" />
+        <p style="display:none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+        <input type="text" name="name" placeholder="Your name" required
+          style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;">
+        <input type="email" name="email" placeholder="Your email (so we can reply)" required
+          style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;">
+        <input type="text" name="order_reference" placeholder="Order/license reference (optional)"
+          style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;">
+        <textarea name="request" placeholder="What would you like us to build or change?" required rows="5"
+          style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;resize:vertical;"></textarea>
+        <button type="submit" class="price-btn" style="background:var(--amber);color:#fff;border-color:var(--amber);cursor:pointer;">Send Request</button>
+      </form>
+    </div>
   </div>
 </section>
 
 <section class="final-cta">
   <div class="wrap">
-    <h2>If you're running a bot, you already know how fast things can go wrong.</h2>
-    <p>BotWatch won't trade for you and won't promise you a return. It'll show you what's actually happening — so you can catch it before it costs you.</p>
-    <a href="#pricing" class="btn-primary" data-checkout="platform">Get Lifetime Access →</a>
+    <h2>If you're running a bot, you already know how fast things can go wrong!</h2>
+    <p>Don't find out the hard way. BotWatch won't trade for you and won't promise you a return — it'll show you exactly what's actually happening, in real time, so you're never the last to know.</p>
+    <a href="#pricing" class="btn-primary" data-checkout="platform">Get Instant Access →</a>
   </div>
 </section>
 
@@ -646,7 +679,9 @@
     platform: "",  // Single license, $297. e.g. "https://getbotwatch.lemonsqueezy.com/buy/xxxxx"
     duo:      "",  // 2-pack "Gift Duo", $554
     family3:  "",  // 3-pack "Family Pack", $776
-    family4:  ""   // 4-pack "Family 4-Pack", $999
+    family4:  "",  // 4-pack "Family 4-Pack", $999
+    hours1:   "",  // Custom work - 1 Hour Block, $135
+    hours5:   ""   // Custom work - 5 Hour Block, $675
   };
 
   document.querySelectorAll("[data-checkout]").forEach((el) => {
