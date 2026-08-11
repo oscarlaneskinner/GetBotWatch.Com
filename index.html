@@ -485,36 +485,36 @@
       <div class="hero-note">One-time license. No subscription. Yours forever. Not financial advice.</div>
     </div>
     <div>
-      <div class="dash" role="img" aria-label="Example BotWatch dashboard showing bot monitoring metrics">
+      <div class="dash" role="img" aria-label="Example BotWatch backtest report showing trade count, win rate, P&amp;L, and buy-and-hold comparison">
         <div class="dash-top">
-          <span class="dash-title">Live Monitor — Strategy A</span>
-          <span class="dash-live"><span class="pulse"></span>LIVE</span>
+          <span class="dash-title">Backtest Report — GLD Trend Bot</span>
+          <span class="dash-live"><span class="pulse" style="animation:none;"></span>6-MONTH TEST</span>
         </div>
         <div class="dash-grid">
           <div class="card">
-            <div class="card-label">Drawdown</div>
-            <div class="card-value amber">-6.2%</div>
-            <div class="card-sub">Threshold: -8.0%</div>
+            <div class="card-label">Total Trades</div>
+            <div class="card-value">47</div>
+            <div class="card-sub">27 wins · 20 losses</div>
           </div>
           <div class="card">
-            <div class="card-label">Open Positions</div>
-            <div class="card-value">7</div>
-            <div class="card-sub">3 flagged for review</div>
+            <div class="card-label">Win Rate</div>
+            <div class="card-value">58%</div>
+            <div class="card-sub">Of closed trades</div>
           </div>
           <div class="card">
-            <div class="card-label">Bot Uptime</div>
-            <div class="card-value teal">99.4%</div>
-            <div class="card-sub">Last 30 days</div>
+            <div class="card-label">Net P&amp;L</div>
+            <div class="card-value teal">+$2,340</div>
+            <div class="card-sub">On $10,000 start</div>
           </div>
           <div class="card">
-            <div class="card-label">Exposure</div>
-            <div class="card-value">2.4x</div>
-            <div class="card-sub">vs. average position</div>
+            <div class="card-label">vs. Buy &amp; Hold</div>
+            <div class="card-value amber">+6.2%</div>
+            <div class="card-sub">Outperformance</div>
           </div>
         </div>
-        <div class="alert-row"><span class="dot warn"></span>Position size on TSLA is 2.4x your average — review exposure before next fill.</div>
+        <div class="alert-row"><span class="dot warn"></span>Full trade-by-trade log included — every entry, exit, and dollar amount, not just the summary.</div>
       </div>
-      <div style="text-align:right;font-size:12px;color:var(--text-faint);margin-top:8px;">Example dashboard — illustrative data, not a live account.</div>
+      <div style="text-align:right;font-size:12px;color:var(--text-faint);margin-top:8px;">Example report — illustrative numbers from a sample backtest.</div>
     </div>
   </div>
 </section>
@@ -561,24 +561,24 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Why it matters</span>
-      <h2>Automated trading moves faster than you can watch manually — that's exactly the problem.</h2>
-      <p>A stuck position, a bad fill, a strategy that keeps trading through conditions it was never built for — these are the quiet failures that drain an account before anyone notices.</p>
+      <h2>Most "trading bot" sellers show you a highlight reel. Here's the whole trade log instead.</h2>
+      <p>A backtest that only covers the good months, a strategy tested on the same data it trained on, numbers with no honest baseline to compare against — these are the quiet ways a strategy looks better than it actually is, until real money finds out.</p>
     </div>
     <div class="why-grid">
       <div class="why-card">
-        <div class="fail">◆ FAILURE MODE</div>
-        <h3>The bot keeps trading through a broken signal</h3>
-        <p>Without a monitoring layer, a strategy can run for hours on bad data or a logic error before you'd ever catch it manually.</p>
+        <div class="fail">◆ COMMON TRAP</div>
+        <h3>A strategy that only "works" on data it already saw</h3>
+        <p>Test on the same data you trained on and almost anything looks profitable. BotWatch's walk-forward testing only ever tests on dates the model has never seen — the same as live conditions.</p>
       </div>
       <div class="why-card">
-        <div class="fail">◆ FAILURE MODE</div>
-        <h3>Exposure creeps up without you noticing</h3>
-        <p>Position sizing drifts over time as a strategy compounds gains or losses — invisible unless something is actively tracking it against your baseline.</p>
+        <div class="fail">◆ COMMON TRAP</div>
+        <h3>Risk settings you set once and never re-check</h3>
+        <p>Your stop-loss, take-profit, and position size live in one config file and are applied exactly the same way in every backtest and every trade decision — no guessing whether the numbers you're looking at match what would actually happen.</p>
       </div>
       <div class="why-card">
-        <div class="fail">◆ FAILURE MODE</div>
-        <h3>An API hiccup goes unnoticed for hours</h3>
-        <p>A stuck connection or delayed fill can leave a bot silently exposed. BotWatch flags heartbeat and latency issues as they happen, not after.</p>
+        <div class="fail">◆ COMMON TRAP</div>
+        <h3>A report that only shows the good parts</h3>
+        <p>Every BotWatch report includes the full trade-by-trade log — dates, prices, dollar P&amp;L, wins and losses — and always shows what simply buying and holding would have returned, for honest context.</p>
       </div>
     </div>
   </div>
@@ -612,8 +612,8 @@
       </div>
       <div class="step-card">
         <div class="step-num">4</div>
-        <h3>Monitor live</h3>
-        <p>Track drawdown, exposure, and latency in real time — from your desktop or your phone.</p>
+        <h3>Review, then decide</h3>
+        <p>See the full trade-by-trade report — win rate, P&amp;L, buy-and-hold comparison — then run it on your own schedule, fully in your control.</p>
       </div>
     </div>
   </div>
@@ -796,7 +796,7 @@
 
         <ul class="price-list">
           <li><span class="chk">✓</span>Full research + monitoring dashboard</li>
-          <li><span class="chk">✓</span>Drawdown, exposure &amp; latency alerts</li>
+          <li><span class="chk">✓</span>Honest backtest reports — full trade log, no spin</li>
           <li><span class="chk">✓</span>GLD Trend Bot included</li>
           <li><span class="chk">✓</span>Full code — yours to customize</li>
           <li><span class="chk">✓</span>Documentation + setup guide</li>
@@ -1000,7 +1000,7 @@
 <section class="final-cta">
   <div class="wrap">
     <h2>If you're running a bot, you already know how fast things can go wrong!</h2>
-    <p>Don't find out the hard way. BotWatch won't trade for you and won't promise you a return — it'll show you exactly what's actually happening, in real time, so you're never the last to know.</p>
+    <p>Don't find out the hard way. BotWatch won't trade for you and won't promise you a return — it'll show you the full trade-by-trade history of what a strategy actually did, not just the parts that make it look good.</p>
     <a href="#pricing" class="btn-primary" data-checkout="platform">Get Instant Access →</a>
   </div>
 </section>
