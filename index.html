@@ -480,34 +480,37 @@
       </div>
       <div class="hero-note">One-time license. No subscription. Yours forever. Not financial advice.</div>
     </div>
-    <div class="dash" role="img" aria-label="Example BotWatch dashboard showing bot monitoring metrics">
-      <div class="dash-top">
-        <span class="dash-title">Live Monitor — Strategy A</span>
-        <span class="dash-live"><span class="pulse"></span>LIVE</span>
+    <div>
+      <div class="dash" role="img" aria-label="Example BotWatch dashboard showing bot monitoring metrics">
+        <div class="dash-top">
+          <span class="dash-title">Live Monitor — Strategy A</span>
+          <span class="dash-live"><span class="pulse"></span>LIVE</span>
+        </div>
+        <div class="dash-grid">
+          <div class="card">
+            <div class="card-label">Drawdown</div>
+            <div class="card-value amber">-6.2%</div>
+            <div class="card-sub">Threshold: -8.0%</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Open Positions</div>
+            <div class="card-value">7</div>
+            <div class="card-sub">3 flagged for review</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Bot Uptime</div>
+            <div class="card-value teal">99.4%</div>
+            <div class="card-sub">Last 30 days</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Exposure</div>
+            <div class="card-value">2.4x</div>
+            <div class="card-sub">vs. average position</div>
+          </div>
+        </div>
+        <div class="alert-row"><span class="dot warn"></span>Position size on TSLA is 2.4x your average — review exposure before next fill.</div>
       </div>
-      <div class="dash-grid">
-        <div class="card">
-          <div class="card-label">Drawdown</div>
-          <div class="card-value amber">-6.2%</div>
-          <div class="card-sub">Threshold: -8.0%</div>
-        </div>
-        <div class="card">
-          <div class="card-label">Open Positions</div>
-          <div class="card-value">7</div>
-          <div class="card-sub">3 flagged for review</div>
-        </div>
-        <div class="card">
-          <div class="card-label">Bot Uptime</div>
-          <div class="card-value teal">99.4%</div>
-          <div class="card-sub">Last 30 days</div>
-        </div>
-        <div class="card">
-          <div class="card-label">Exposure</div>
-          <div class="card-value">2.4x</div>
-          <div class="card-sub">vs. average position</div>
-        </div>
-      </div>
-      <div class="alert-row"><span class="dot warn"></span>Position size on TSLA is 2.4x your average — review exposure before next fill.</div>
+      <div style="text-align:right;font-size:12px;color:var(--text-faint);margin-top:8px;">Example dashboard — illustrative data, not a live account.</div>
     </div>
   </div>
 </section>
@@ -716,7 +719,7 @@
       <a href="#" class="tool-chip" data-affiliate="tradingview">TradingView <span class="arrow">↗</span></a>
       <a href="#" class="tool-chip" data-affiliate="alpaca">Alpaca <span class="arrow">↗</span></a>
     </div>
-    <p class="tools-disclosure">Some links above are affiliate/referral links. If you sign up through them, we may earn a commission at no additional cost to you — we only link to tools we actually use.</p>
+    <p class="tools-disclosure">Some links above will become affiliate/referral links once those programs are live. If you sign up through them, we may earn a commission at no additional cost to you — we only link to tools we actually use.</p>
   </div>
 </section>
 
@@ -765,8 +768,8 @@
       <div class="trust-item">
         <span class="trust-icon">📡</span>
         <div>
-          <h4>No telemetry</h4>
-          <p>BotWatch doesn't phone home. It talks to your broker's API and nothing else.</p>
+          <h4>No trading data leaves your machine</h4>
+          <p>Your keys, positions, and results never leave your computer. The only thing ever sent out is an anonymous crash report if something breaks (error text only, nothing about your account) — and you can turn even that off. See the <a href="disclaimer.html#data-handling" style="color:var(--amber);">full details</a>.</p>
         </div>
       </div>
     </div>
