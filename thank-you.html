@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BotWatch — Thanks for your order</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://getbotwatch.com/thank-you.html">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E141F; --panel:#161D2C; --panel-alt:#1C2438; --border:#2A3348;
+    --text:#E7EBF3; --text-muted:#8D96AC; --text-faint:#5C6580;
+    --amber:#2F8AF5; --teal:#47C2A0; --red:#E2604F;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;}
+  a{color:var(--amber);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--amber);color:#141922;}
+
+  header{padding:24px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);}
+  .brand-mark{width:22px;height:22px;border-radius:5px;background:linear-gradient(135deg,var(--amber),var(--red));position:relative;flex-shrink:0;}
+  .brand-mark::after{content:"";position:absolute;inset:5px;border-radius:2px;background:var(--bg);}
+
+  main{flex:1;padding:40px 0 80px;}
+  .check{
+    width:56px;height:56px;border-radius:50%;background:var(--panel);border:1px solid var(--teal);
+    display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--teal);margin-bottom:24px;
+  }
+  h1{font-family:var(--font-display);font-size:clamp(26px,4vw,34px);font-weight:600;margin-bottom:14px;letter-spacing:-0.01em;}
+  .sub{color:var(--text-muted);font-size:16px;margin-bottom:36px;max-width:52ch;}
+
+  .step{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:20px 22px;margin-bottom:14px;display:flex;gap:16px;
+  }
+  .step .n{
+    font-family:var(--font-mono);font-size:13px;color:var(--amber);border:1px solid var(--border);
+    border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .step h3{font-size:15.5px;margin-bottom:4px;color:var(--text);}
+  .step p{font-size:14px;color:var(--text-muted);}
+
+  .support{margin-top:32px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;color:var(--text-muted);}
+
+  footer{border-top:1px solid var(--border);padding:24px 0;text-align:center;font-size:12.5px;color:var(--text-faint);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="brand-mark"></span>BotWatch</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="check">✓</div>
+    <h1>You're in. Thanks for picking up BotWatch.</h1>
+    <p class="sub">Lemon Squeezy just emailed your license key and download link to the address you used at checkout — usually within a minute or two. Here's what to do next.</p>
+
+    <div class="step">
+      <span class="n">1</span>
+      <div><h3>Check your inbox</h3><p>Look for an email from Lemon Squeezy with your license key and download link. Check spam if it hasn't shown up after a few minutes.</p></div>
+    </div>
+    <div class="step">
+      <span class="n">2</span>
+      <div><h3>Unzip and launch</h3><p>Double-click the launcher — it sets up everything it needs automatically and opens the dashboard in your browser.</p></div>
+    </div>
+    <div class="step">
+      <span class="n">3</span>
+      <div><h3>Start with the README</h3><p>The Quick Start section gets most people running in under 10 minutes.</p></div>
+    </div>
+    <div class="step">
+      <span class="n">4</span>
+      <div><h3>Questions along the way?</h3><p>Use the Ask Claude tab inside the dashboard, or email <a href="mailto:hello@getbotwatch.com">hello@getbotwatch.com</a>.</p></div>
+    </div>
+
+    <p class="support"><a href="index.html">← Back to getbotwatch.com</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 BotWatch, LLC. Not financial advice.</div>
+</footer>
+
+<!-- =========================================================
+     PURCHASE CONVERSION EVENT (optional, off by default) —
+     fires once, on this page, after a successful checkout on
+     Lemon Squeezy. Inactive until you uncomment and fill in your
+     own IDs (same ones used in index.html's tracking scaffold).
+     Requires this page to actually be set as each Lemon Squeezy
+     product's redirect URL (Product -> Confirmation modal ->
+     redirect after purchase) instead of Lemon Squeezy's own
+     hosted confirmation modal.
+     ========================================================= -->
+<!--
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'Purchase', {currency: 'USD', value: 297.00});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXX');
+  gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXXX/YOUR_LABEL', 'value': 297.00, 'currency': 'USD'});
+</script>
+-->
+</body>
+</html>
